@@ -1,3 +1,3 @@
 # Tikkipeli
 
-Tarkennusta Tikkipelin sääntöihin.
+Tarkennusta Tikkipelin sääntöihin. v2
