@@ -16,7 +16,7 @@ public class Kortti {
         return "maa" + this.maa + "arvo" + this.arvo + "pisteet" + this.pisteet;
     }
 
-    private int getMaa() {
+    public int getMaa() {
         return this.maa;
     }
     

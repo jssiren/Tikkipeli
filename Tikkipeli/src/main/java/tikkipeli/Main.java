@@ -10,11 +10,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("blaa");
-        Kortti kortti = new Kortti(0,1);
-        //System.out.println(kortti);
-        Pakka pakka = new Pakka();
-        pakka.lisaaKortti();
-        System.out.println(pakka.getKortit().toString());
+
     }
 }

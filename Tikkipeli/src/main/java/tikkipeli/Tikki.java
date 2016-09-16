@@ -4,19 +4,19 @@ import java.util.*;
 
 public class Tikki {
     private int moneskoTikki;
-    private ArrayList<Kortti> kortit;
+    private HashMap pelatutKortit;
     
     public Tikki() {
-        this.kortit = new ArrayList<Kortti>();
+        this.pelatutKortit = new HashMap<Kortti, Pelaaja>();
     }
     
-    public ArrayList<Kortti> getKortit() {
-        return this.kortit;
+    public HashMap<Kortti, Pelaaja> getKortit() {
+        return this.pelatutKortit;
     }
     
-    public void lisaaKorttiTikkiin(Kortti kortti) {
-        this.kortit.add(kortti);
-    }
+//    public void lisaaKorttiTikkiin(Kortti kortti) {
+//        this.kortit.add(kortti);
+//    }
     
     
 }
