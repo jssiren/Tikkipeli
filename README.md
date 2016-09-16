@@ -1,3 +1,5 @@
 # Tikkipeli
 
-Tarkennusta Tikkipelin sääntöihin. v2
+## Dokumentaatio
+[aiheen kuvaus](dokumentaatio/aiheenKuvausJaRakenne.md
+[tuntikirjanpito](dokumentaatio/tuntikirjanpito.md
