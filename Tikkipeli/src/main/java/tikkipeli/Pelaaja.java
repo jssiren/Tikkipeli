@@ -15,8 +15,16 @@ public class Pelaaja {
         this.nimi = nimi;
     }
     
+    public void setKasi(Kasi kasi) {
+        this.kasi = kasi;
+    }
+    
     public String getNimi() {
         return this.nimi;
+    }
+    
+    public Kasi getKasi() {
+        return this.kasi;
     }
     
     @Override

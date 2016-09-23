@@ -4,19 +4,35 @@ import java.util.*;
 
 public class Tikki {
     private int moneskoTikki;
-    private HashMap pelatutKortit;
+    private Kortti[] pelatutKortit;
+    private Pelaaja[] pelaajat;
     
-    public Tikki() {
-        this.pelatutKortit = new HashMap<Kortti, Pelaaja>();
+    public Tikki(int i) {
+        this.pelaajat = new Pelaaja[4];
+        this.pelatutKortit = new Kortti[4];
+        moneskoTikki = i;
     }
     
-    public HashMap<Kortti, Pelaaja> getKortit() {
+    public Kortti[] getKortit() {
         return this.pelatutKortit;
     }
     
-//    public void lisaaKorttiTikkiin(Kortti kortti) {
-//        this.kortit.add(kortti);
-//    }
+    public Pelaaja[] getPelaajat() {
+        return this.pelaajat;
+    }
     
+    public void setPelaajat(Pelaaja[] pelaajat) {
+        this.pelaajat = pelaajat;
+    }
+    
+    public void lisaaKorttiPaikkaanI(int i, Kortti kortti) {
+        this.pelatutKortit[i] = kortti;
+    }
+    
+    public Kortti tikinVoittavaKortti() {
+        // kehitä logiikka
+        Kortti voittavaKortti = new Kortti(Maa.HERTTA, KortinArvo.k6); // jotta metodi ei tuota erroria
+        return voittavaKortti;
+    }
     
 }

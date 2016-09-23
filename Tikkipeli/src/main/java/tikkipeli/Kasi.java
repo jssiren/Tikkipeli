@@ -9,8 +9,20 @@ public class Kasi {
         this.kortit = new ArrayList<Kortti>();
     }
     
-    public ArrayList<Kortti> getKasi() {
+    public ArrayList<Kortti> getKortit() {
         return this.kortit;
+    }
+    
+    public void setKortit(ArrayList<Kortti> kortit) {
+        this.kortit = kortit;
+    }
+    
+    public void lisaaKorttiKateen(Kortti kortti) {
+        kortit.add(kortti);
+    }
+    
+    public void kortitJarjestykseen() {
+        Collections.sort(kortit);
     }
     
 }

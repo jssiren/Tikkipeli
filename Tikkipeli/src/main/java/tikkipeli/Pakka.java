@@ -8,52 +8,11 @@ public class Pakka {
 
     public Pakka() {
         this.kortit = new ArrayList<Kortti>();
-        int i = 0;
-        for (i = 0; i <= 3; i++) {
-            int j = 6;
-            for (j = 6; j <= 15; j++) {
-                if (j != 10) {
-                    Kortti kortti = new Kortti(i, j);
-                    if (j >= 11 && j <= 13) {
-                        kortti.setPisteet(5);
-                        this.kortit.add(kortti);
-                    } else if (j >= 14) {
-                        kortti.setPisteet(10);
-                        this.kortit.add(kortti);
-                    } else {
-                        this.kortit.add(kortti);
-                    }   
-                }
-            }
-        }
-    }
 
-    public void lisaaKortti() {
-        Kortti kortti = new Kortti(0, 0);
-        kortti.setMaa(2);
-        kortti.setArvo(3);
-        this.kortit.add(kortti);
-    }
-
-    public void lisaaKortit() {
-        int i = 0;
-        for (i = 0; i <= 3; i++) {
-            int j = 6;
-            for (j = 6; j <= 15; j++) {
-                if (j != 10) {
-                    Kortti kortti = new Kortti(i, j);
-                    if (j >= 11 && j <= 13) {
-                        kortti.setPisteet(5);
-                        this.kortit.add(kortti);
-                    } else if (j >= 14) {
-                        kortti.setPisteet(10);
-                        this.kortit.add(kortti);
-                    } else {
-                        this.kortit.add(kortti);
-                    }
-                    
-                }
-
+        for (Maa maa : Maa.values()) {
+            for (KortinArvo arvo : KortinArvo.values()) {
+                Kortti kortti1 = new Kortti(maa, arvo);
+                this.kortit.add(kortti1);
             }
         }
     }
@@ -63,14 +22,48 @@ public class Pakka {
     }
 
     public void tulostaPakka() {
-        this.kortit.stream().forEach((kortti) -> {
-            kortti.toString();
-        });
+        for (Kortti kortti : this.kortit) {
+            System.out.println(kortti);
+        }
     }
 
     @Override
     public String toString() {
         return this.kortit.toString();
+    }
+
+    public void sekoitaPakka() {
+        Collections.shuffle(kortit);
+    }
+
+    public void jarjestaPakka() {
+        Collections.sort(kortit);
+    }
+
+    public List jaaPakkaNeljaan() {
+        ArrayList<Kasi> pakat = new ArrayList<Kasi>();
+        Kasi kasi1 = new Kasi();
+        Kasi kasi2 = new Kasi();
+        Kasi kasi3 = new Kasi();
+        Kasi kasi4 = new Kasi();
+        int i = 0;
+        for (Kortti kortti : this.kortit) {
+            if (i % 4 == 0) {
+                kasi1.lisaaKorttiKateen(kortti);
+            } else if (i % 4 == 1) {
+                kasi2.lisaaKorttiKateen(kortti);
+            } else if (i % 4 == 2) {
+                kasi3.lisaaKorttiKateen(kortti);
+            } else if (i % 4 == 3) {
+                kasi4.lisaaKorttiKateen(kortti);
+            }
+            i++;
+        }
+        pakat.add(kasi1);
+        pakat.add(kasi2);
+        pakat.add(kasi3);
+        pakat.add(kasi4);
+        return pakat;
     }
 
 }

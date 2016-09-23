@@ -10,13 +10,9 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-/**
- *
- * @author janne
- */
 public class KorttiTest {
     
-    Kortti kortti;
+    Kortti korttiH6;
     Pakka pakka;
     
     public KorttiTest() {
@@ -32,7 +28,7 @@ public class KorttiTest {
     
     @Before
     public void setUp() {
-        kortti = new Kortti(0,0);
+        korttiH6 = new Kortti(Maa.HERTTA,KortinArvo.k6);
         pakka = new Pakka();
     }
     
@@ -42,23 +38,17 @@ public class KorttiTest {
 
     @Test
     public void konstruktoriAsettaaPisteetNollaksi() {
-        assertEquals(0,kortti.getPisteet());
+        assertEquals(0,korttiH6.getPisteet());
     }
     
     @Test
     public void maaOikein() {
-        assertEquals(0,kortti.getMaa());
+        assertEquals(Maa.HERTTA,korttiH6.getMaa());
     }
     
     @Test
     public void arvoOikein() {
-        assertEquals(0,kortti.getArvo());
-    }
-    
-    @Test
-    public void oikeaLukumaaraPakassaJosLisattyYksi() {
-        pakka.lisaaKortti();
-        assertEquals(37, pakka.getKortit().size());
+        assertEquals(6,korttiH6.getArvo());
     }
     
     @Test
@@ -76,10 +66,10 @@ public class KorttiTest {
     }
     
     @Test
-    public void pakassaOikeaMaaraMaataNolla() {
+    public void pakassaOikeaMaaraHerttaa() {
         ArrayList<Kortti> kortitNolla = new ArrayList<Kortti>();
         for (Kortti kortti : pakka.getKortit()) {
-            if (kortti.getMaa() == 3) {
+            if (kortti.getMaa() == Maa.HERTTA) {
                 kortitNolla.add(kortti);
             }
         }
@@ -87,10 +77,10 @@ public class KorttiTest {
     }
     
     @Test
-    public void pakassaOikeaMaaraMaataYksi() {
+    public void pakassaOikeaMaaraRuutua() {
         ArrayList<Kortti> kortitYksi = new ArrayList<Kortti>();
         for (Kortti kortti : pakka.getKortit()) {
-            if (kortti.getMaa() == 3) {
+            if (kortti.getMaa() == Maa.RUUTU) {
                 kortitYksi.add(kortti);
             }
         }
@@ -98,10 +88,10 @@ public class KorttiTest {
     }
     
     @Test
-    public void pakassaOikeaMaaraMaataKaksi() {
+    public void pakassaOikeaMaaraRistia() {
         ArrayList<Kortti> kortitKaksi = new ArrayList<Kortti>();
         for (Kortti kortti : pakka.getKortit()) {
-            if (kortti.getMaa() == 3) {
+            if (kortti.getMaa() == Maa.RISTI) {
                 kortitKaksi.add(kortti);
             }
         }
@@ -109,10 +99,10 @@ public class KorttiTest {
     }
     
     @Test
-    public void pakassaOikeaMaaraMaataKolme() {
+    public void pakassaOikeaMaaraPataa() {
         ArrayList<Kortti> kortitKolme = new ArrayList<Kortti>();
         for (Kortti kortti : pakka.getKortit()) {
-            if (kortti.getMaa() == 3) {
+            if (kortti.getMaa() == Maa.PATA) {
                 kortitKolme.add(kortti);
             }
         }
@@ -125,6 +115,41 @@ public class KorttiTest {
         assertEquals("blaa",pelaaja.getNimi());
     }
     
+    @Test
+    public void hertanValttiarvoOikein() {
+        assertEquals(100, Maa.HERTTA.getValtinArvo());
+    }
     
+    @Test
+    public void ruudunValttiarvoOikein() {
+        assertEquals(80, Maa.RUUTU.getValtinArvo());
+    }
     
+    @Test
+    public void ristinValttiarvoOikein() {
+        assertEquals(60, Maa.RISTI.getValtinArvo());
+    }
+    
+    @Test
+    public void pataValttiarvoOikein() {
+        assertEquals(40, Maa.PATA.getValtinArvo());
+    }
+    
+    @Test
+    public void kymppinArvoSuurempiKuningas() {
+        Kortti kymppi = new Kortti(Maa.HERTTA, KortinArvo.k10);
+        Kortti kuningas = new Kortti(Maa.RISTI, KortinArvo.kK);
+        assertEquals(1,kymppi.getArvo() - kuningas.getArvo());
+    }
+    
+    public void assanArvoSuurempiKympin() {
+        Kortti kymppi = new Kortti(Maa.HERTTA, KortinArvo.k10);
+        Kortti assa = new Kortti(Maa.RISTI, KortinArvo.kA);
+        assertEquals(1,assa.getArvo() - kymppi.getArvo());
+    }
+    
+    @Test
+    public void numerokorttienPisteetOnNolla() {
+        
+    } 
 }
