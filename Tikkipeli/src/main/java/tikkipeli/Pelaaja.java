@@ -29,7 +29,7 @@ public class Pelaaja {
     
     @Override
     public String toString() {
-        return this.nimi;
+        return this.nimi + this.kasi.toString();
     }
     
     

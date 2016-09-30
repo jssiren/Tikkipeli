@@ -25,4 +25,8 @@ public class Kasi {
         Collections.sort(kortit);
     }
     
+    @Override
+    public String toString() {
+        return this.kortit.toString();
+    }
 }

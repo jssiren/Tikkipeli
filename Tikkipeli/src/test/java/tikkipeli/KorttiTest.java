@@ -1,6 +1,18 @@
 package tikkipeli;
 
 
+//import tikkipeli.Logiikka.Maa;
+//import tikkipeli.Logiikka.Kortti;
+//import tikkipeli.Logiikka.KortinArvo;
+//import tikkipeli.Logiikka.Pakka;
+//import tikkipeli.Logiikka.Pelaaja;
+import tikkipeli.Pelaaja;
+import tikkipeli.KortinArvo;
+import tikkipeli.Tikkilogiikka;
+import tikkipeli.Tikki;
+import tikkipeli.Kortti;
+import tikkipeli.Pakka;
+import tikkipeli.Maa;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -14,6 +26,8 @@ public class KorttiTest {
     
     Kortti korttiH6;
     Pakka pakka;
+    Tikki tikki;
+    Kasi kasi;
     
     public KorttiTest() {
     }
@@ -29,7 +43,9 @@ public class KorttiTest {
     @Before
     public void setUp() {
         korttiH6 = new Kortti(Maa.HERTTA,KortinArvo.k6);
+        kasi = new Kasi();
         pakka = new Pakka();
+        tikki = new Tikki(1);
     }
     
     @After
@@ -150,6 +166,52 @@ public class KorttiTest {
     
     @Test
     public void numerokorttienPisteetOnNolla() {
-        
-    } 
+        int pisteet = 0;
+        for (Kortti kortti : pakka.getKortit()) {
+            if (kortti.getArvo() < 11) {
+                pisteet += kortti.getPisteet();
+            }
+        }
+        assertEquals(0,pisteet);
+    }
+    
+    @Test
+    public void herttaAssaVoittaaTikinIlmanValttia() {
+        tikki.lisaaKorttiPaikkaanI(0, new Kortti(Maa.HERTTA,KortinArvo.k10));
+        tikki.lisaaKorttiPaikkaanI(1, new Kortti(Maa.HERTTA,KortinArvo.kA));
+        tikki.lisaaKorttiPaikkaanI(2, new Kortti(Maa.PATA,KortinArvo.k6));
+        tikki.lisaaKorttiPaikkaanI(3, new Kortti(Maa.RISTI,KortinArvo.kJ));
+        Kortti voittava = new Kortti(Maa.HERTTA,KortinArvo.kA);
+        assertEquals(voittava.toString(), tikki.tikinVoittavaKortti().toString());
+    }
+    
+    @Test
+    public void pata6VoittaaTikinIlmanValttia() {
+        tikki.lisaaKorttiPaikkaanI(2, new Kortti(Maa.HERTTA,KortinArvo.k10));
+        tikki.lisaaKorttiPaikkaanI(1, new Kortti(Maa.HERTTA,KortinArvo.kA));
+        tikki.lisaaKorttiPaikkaanI(0, new Kortti(Maa.PATA,KortinArvo.k6));
+        tikki.lisaaKorttiPaikkaanI(3, new Kortti(Maa.RISTI,KortinArvo.kJ));
+        Kortti voittava = new Kortti(Maa.PATA,KortinArvo.k6);
+        assertEquals(voittava.toString(), tikki.tikinVoittavaKortti().toString());
+    }
+
+    @Test
+    public void valittiJulistettu() {
+        Tikkilogiikka logiikka = new Tikkilogiikka();
+        logiikka.julistaValtti(Maa.PATA);
+        assertTrue(logiikka.getOnkoValttia());
+    }
+    
+    @Test
+    public void mikaValittiJulistettu() {
+        Tikkilogiikka logiikka = new Tikkilogiikka();
+        logiikka.julistaValtti(Maa.PATA);
+        assertEquals(Maa.PATA,logiikka.getValtti());
+    }
+    
+    @Test
+    public void kasiEiTyhja() {
+        kasi.lisaaKorttiKateen(korttiH6);
+        assertTrue(!kasi.getKortit().isEmpty());
+    }
 }
