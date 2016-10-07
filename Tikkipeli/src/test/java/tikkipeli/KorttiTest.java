@@ -6,13 +6,14 @@ package tikkipeli;
 //import tikkipeli.Logiikka.KortinArvo;
 //import tikkipeli.Logiikka.Pakka;
 //import tikkipeli.Logiikka.Pelaaja;
-import tikkipeli.Pelaaja;
-import tikkipeli.KortinArvo;
-import tikkipeli.Tikkilogiikka;
-import tikkipeli.Tikki;
-import tikkipeli.Kortti;
-import tikkipeli.Pakka;
-import tikkipeli.Maa;
+import tikkipeli.Logic.Kasi;
+import tikkipeli.Logic.Pelaaja;
+import tikkipeli.Logic.KortinArvo;
+import tikkipeli.Logic.Tikkilogiikka;
+import tikkipeli.Logic.Tikki;
+import tikkipeli.Logic.Kortti;
+import tikkipeli.Logic.Pakka;
+import tikkipeli.Logic.Maa;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -177,20 +178,20 @@ public class KorttiTest {
     
     @Test
     public void herttaAssaVoittaaTikinIlmanValttia() {
-        tikki.lisaaKorttiPaikkaanI(0, new Kortti(Maa.HERTTA,KortinArvo.k10));
-        tikki.lisaaKorttiPaikkaanI(1, new Kortti(Maa.HERTTA,KortinArvo.kA));
-        tikki.lisaaKorttiPaikkaanI(2, new Kortti(Maa.PATA,KortinArvo.k6));
-        tikki.lisaaKorttiPaikkaanI(3, new Kortti(Maa.RISTI,KortinArvo.kJ));
+        tikki.lisaaKorttiTikkiin(new Kortti(Maa.HERTTA,KortinArvo.k10));
+        tikki.lisaaKorttiTikkiin(new Kortti(Maa.HERTTA,KortinArvo.kA));
+        tikki.lisaaKorttiTikkiin(new Kortti(Maa.PATA,KortinArvo.k6));
+        tikki.lisaaKorttiTikkiin(new Kortti(Maa.RISTI,KortinArvo.kJ));
         Kortti voittava = new Kortti(Maa.HERTTA,KortinArvo.kA);
         assertEquals(voittava.toString(), tikki.tikinVoittavaKortti().toString());
     }
     
     @Test
     public void pata6VoittaaTikinIlmanValttia() {
-        tikki.lisaaKorttiPaikkaanI(2, new Kortti(Maa.HERTTA,KortinArvo.k10));
-        tikki.lisaaKorttiPaikkaanI(1, new Kortti(Maa.HERTTA,KortinArvo.kA));
-        tikki.lisaaKorttiPaikkaanI(0, new Kortti(Maa.PATA,KortinArvo.k6));
-        tikki.lisaaKorttiPaikkaanI(3, new Kortti(Maa.RISTI,KortinArvo.kJ));
+        tikki.lisaaKorttiTikkiin(new Kortti(Maa.PATA,KortinArvo.k6));
+        tikki.lisaaKorttiTikkiin(new Kortti(Maa.HERTTA,KortinArvo.kA));
+        tikki.lisaaKorttiTikkiin(new Kortti(Maa.HERTTA,KortinArvo.k10));
+        tikki.lisaaKorttiTikkiin(new Kortti(Maa.RISTI,KortinArvo.kJ));
         Kortti voittava = new Kortti(Maa.PATA,KortinArvo.k6);
         assertEquals(voittava.toString(), tikki.tikinVoittavaKortti().toString());
     }
@@ -213,5 +214,26 @@ public class KorttiTest {
     public void kasiEiTyhja() {
         kasi.lisaaKorttiKateen(korttiH6);
         assertTrue(!kasi.getKortit().isEmpty());
+    }
+    
+    @Test
+    public void kadestaPoistettuVahentaaKadenKorttienLkm() {
+        Random random = new Random();
+        int i = random.nextInt(9);
+        kasi = (Kasi) pakka.jaaPakkaNeljaan().get(1);
+        Kortti poistettava = (Kortti) kasi.getKortit().get(i);
+        kasi.poistaKorttiKadesta(poistettava);
+        int koko = kasi.getKortit().size();
+        assertEquals(8,koko);
+    }
+    
+    @Test
+    public void kadestaPoistettuOnPoissa() {
+        Random random = new Random();
+        int i = random.nextInt(9);
+        kasi = (Kasi) pakka.jaaPakkaNeljaan().get(1);
+        Kortti poistettava = kasi.getKortit().get(i);
+        kasi.poistaKorttiKadesta(poistettava);
+        assertFalse(kasi.getKortit().contains(poistettava));
     }
 }
