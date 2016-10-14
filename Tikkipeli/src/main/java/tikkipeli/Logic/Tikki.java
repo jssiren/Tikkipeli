@@ -10,8 +10,8 @@ import java.util.*;
  */
 public class Tikki {
 
-    private ArrayList<Kortti> tikinKortit;
-    private ArrayList<Integer> pelaajat;
+    private ArrayList<Kortti> kortit;
+    private ArrayList<Pelaaja> pelaajat;
     private Maa valtti;
 
     /**
@@ -19,7 +19,7 @@ public class Tikki {
      * @param valttiMaa
      */
     public Tikki() {
-        this.tikinKortit = new ArrayList<>();
+        this.kortit = new ArrayList<>();
         pelaajat = new ArrayList<>();
         valtti = Maa.TYHJA;
     }
@@ -29,7 +29,7 @@ public class Tikki {
      * @return
      */
     public ArrayList<Kortti> getKortit() {
-        return this.tikinKortit;
+        return this.kortit;
     }
 
     /**
@@ -42,26 +42,6 @@ public class Tikki {
     }
 
     /**
-     * Metodilla asetetaan pelaajan kädestä tikkiin kortti ja samalla
-     * tarkistetaan voiko näin tehdä sääntöjen puitteissa. Pelissä on aina
-     * muistettava ylimenopakko ja maantunnustuspakko.
-     *
-     * @param moneskoKortti
-     * @param pelaaja
-     *
-     * @return
-     */
-    public boolean lisaaKorttiTikkiin(int moneskoKortti, Pelaaja pelaaja) {
-        if (voikoKortinPelataTikkiin(moneskoKortti, pelaaja)) {
-            tikinKortit.add(pelaaja.getKasi().getKortit().get(moneskoKortti));
-            pelaaja.getKasi().poistaKorttiKadesta(pelaaja.getKasi().getKortit().get(moneskoKortti));
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Metodi kertoo mikä kortti voittaa kullakin hetkellä tikin seuraten pelin
      * korttijärjestyksen logiikkaa riippuen kuinka monta korttii on pelattu
      * tikkiin.
@@ -69,19 +49,19 @@ public class Tikki {
      * @return
      */
     public Kortti tikinVoittavaKortti() {
-        Kortti kortti = tikinKortit.get(0); // tikin aloittava kortti
+        Kortti kortti = kortit.get(0); // tikin aloittava kortti
         if (valtti.equals(Maa.TYHJA)) {
-            for (Kortti kortti1 : tikinKortit) {
+            for (Kortti kortti1 : kortit) {
                 if (kortti1.getMaa().equals(kortti.getMaa()) && kortti1.getArvo() > kortti.getArvo()) {
                     kortti = kortti1;
                 }
             }
             return kortti;
         } else {
-            for (Kortti kortti1 : tikinKortit) {
+            for (Kortti kortti1 : kortit) {
                 if (!kortti.getMaa().equals(valtti) && kortti1.getMaa().equals(valtti)) {
                     kortti = kortti1;
-                } else if (kortti.getMaa().equals(valtti) && kortti1.getMaa().equals(valtti) && (kortti1.getArvo() > kortti.getArvo()) ) {
+                } else if (kortti.getMaa().equals(valtti) && kortti1.getMaa().equals(valtti) && (kortti1.getArvo() > kortti.getArvo())) {
                     kortti = kortti1;
                 }
             }
@@ -90,8 +70,8 @@ public class Tikki {
     }
 
     private boolean tikkiinPelattuValttia() {
-        if (!tikinKortit.isEmpty()) {
-            for (Kortti kortti : tikinKortit) {
+        if (!kortit.isEmpty()) {
+            for (Kortti kortti : kortit) {
                 if (kortti.getMaa().equals(valtti)) {
                     return true;
                 }
@@ -119,42 +99,45 @@ public class Tikki {
         Kasi pelaajanKasi = pelaaja.getKasi();
         Kortti pelattavaKortti = pelaajanKasi.getKortit().get(moneskoKortti);
 
-        if (tikinKortit.isEmpty()) {
+        if (kortit.isEmpty()) {
             return true;
         } else {
-            Kortti tikinAloitusKortti = tikinKortit.get(0);
+            Kortti tikinAloitusKortti = kortit.get(0);
             Kortti tikinJohtavaKortti = tikinVoittavaKortti();
-            if (pelaajanKasi.loytyykoKadestaSamaaMaataJaIsompaa(tikinJohtavaKortti) && (pelattavaKortti.getArvo() < tikinJohtavaKortti.getArvo() || pelattavaKortti.getMaa().equals(tikinJohtavaKortti.getMaa()))) {
-                return false;
+
+            if (pelaajanKasi.loytyykoKadestaSamaaMaataJaIsompaa(tikinJohtavaKortti)) {
+                if (!pelattavaKortti.getMaa().equals(tikinJohtavaKortti.getMaa()) || pelattavaKortti.getArvo() < tikinJohtavaKortti.getArvo()) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } else if (pelaajanKasi.loytyykoKadestaMaata(tikinAloitusKortti.getMaa())) {
+                if (!pelattavaKortti.getMaa().equals(tikinAloitusKortti.getMaa())) {
+                    return false;
+                } else {
+                    return true;
+                }
             } else {
                 return true;
             }
-//            
-//            if (valtti == Maa.TYHJA || (valtti != Maa.TYHJA && (tikinAloitusKortti.getMaa().equals(pelattavaKortti.getMaa()) && pelattavaKortti.getMaa().equals(valtti) || !tikkiinPelattuValttia()))) {
-//                if (pelaajanKasi.loytyykoKadestaSamaaMaataJaIsompaa(tikinJohtavaKortti) && pelattavaKortti.getArvo() < tikinJohtavaKortti.getArvo()) {
-//                    return false;
-//                } else if (pelaajanKasi.loytyykoKadestaMaata(tikinJohtavaKortti.getMaa()) && !pelattavaKortti.getMaa().equals(tikinJohtavaKortti.getMaa())) {
-//                    return false;
-//                } else {
-//                    return true;
-//                }
-//            } else if (!tikinAloitusKortti.getMaa().equals(valtti) && tikinAloitusKortti.getMaa().equals(pelattavaKortti.getMaa())) {
-//                if (tikkiinPelattuValttia()) {
-//                    return true;
-//                } else {
-//                    return false;
-//                }
-//            } else {
-//                return true;
-//            }
         }
     }
 
     public int tikinPisteet() {
         int pisteet = 0;
-        for (Kortti kortti : tikinKortit) {
+        for (Kortti kortti : kortit) {
             pisteet += kortti.getPisteet();
         }
         return pisteet;
+    }
+
+    public boolean vuorossaOlevaPelaajaPelaaKortin(Pelaaja pelaaja, int moneskoKortti) {
+        if (voikoKortinPelataTikkiin(moneskoKortti, pelaaja) && pelaaja.poistaKortti(moneskoKortti)) {
+            kortit.add(pelaaja.getKasi().getKortit().get(moneskoKortti));
+            pelaajat.add(pelaaja);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

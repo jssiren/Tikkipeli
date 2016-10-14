@@ -26,4 +26,12 @@ public enum Maa {
         return lyhenne;
     }
     
+    public boolean equals(Maa maa) {
+        if (lyhenne.matches(maa.getLyhenne())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
 }

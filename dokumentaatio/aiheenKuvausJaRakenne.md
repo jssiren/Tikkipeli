@@ -6,15 +6,21 @@ Korttijärjestys on Tikkipelissa myös erityinen. Korttien arvojärjestys menee seu
 
 Koska jokainen pelaaja pelaa alustavasti samalla ruudulla, täytyy omien korttien näkyvyys peittää, jolloin käyttöliittymä kysyy milloni siirrytään seuraavaan pelaajaan.
 
-Käyttöliittymänä toimii alustavasti tekstipohjainen käyttöliittymä.
+Käyttöliittymänä toimii yksi ruutu, josta nähdään koko ajan kaikki.
 
 
 **Käyttäjät**: Pelaajat, 4 kpl.
 
 **Kaikkien käyttäjien toiminnot**:
+- Nimien asettaminen pelaajille
 - Pelikortin pelaaminen 
-- Huutokaupassa tehtäv "huuto"
+- Huutokaupassa tehtävä "huuto" tai passauss
 - Valtin tai puolikkaan kysyminen
 
 ###Luokkakaavio:
 ![luokkakaavio](/dokumentaatio/401b1624.png "Luokkakaavio")
+
+
+###Sekvenssiokaatiot:
+![sekvkaavio1](/dokumentaatio/sekvenssikaavio1.png "Kortin pelaaminen tikkiin")
+![sekvkaavio2](/dokumentaatio/sekvenssikaavio2.png "Voiko kortin ylipäätänsä pelata")

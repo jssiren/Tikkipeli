@@ -11,7 +11,10 @@ public class Peli {
     private int vuorossaOlevaPelaaja;
     private List<Huutokierros> huutokierrokset;
     private boolean[] passaukset;
-    private int kierrostenLkm;
+    private boolean huutokierrosKaynnissa;
+    private boolean kierrosKaynnissa;
+    private boolean pelaajatLuotu;
+    private boolean korttiPelattu;
 
     public Peli() {
         this.pakka = new Pakka();
@@ -20,6 +23,10 @@ public class Peli {
         pelaajat = new ArrayList<>();
         huutokierrokset = new ArrayList<>();
         passaukset = new boolean[4];
+        huutokierrosKaynnissa = false;
+        kierrosKaynnissa = false;
+        pelaajatLuotu = false;
+        
     }
 
     public List<Kierros> getKierrokset() {
@@ -41,14 +48,49 @@ public class Peli {
     public int getVuorossaOlevaPelaaja() {
         return vuorossaOlevaPelaaja;
     }
-
-    public void setPeliparit(String nimi1, String nimi2, String nimi3, String nimi4) {
+    
+    public boolean getHuutokierrosKaynnissa() {
+        return huutokierrosKaynnissa;
+    }
+    
+    public boolean getKierrosKaynnissa() {
+        return kierrosKaynnissa;
+    }
+    
+    public boolean getPelaajatLuotu() {
+        return pelaajatLuotu;
+    }
+    
+    public boolean getKorttiPelattu() {
+        return korttiPelattu;
+    }
+    
+    public void setKorttiPelattu(boolean onko) {
+        korttiPelattu = onko;
+    }
+    
+    public void setPelaajatLuotu(boolean onko) {
+        pelaajatLuotu = onko;
+    }
+    
+    public void setHuutokierrosKaynnissa(boolean onko) {
+        huutokierrosKaynnissa = onko;
+    }
+    
+    public void setKierrosKaynnissa(boolean onko) {
+        kierrosKaynnissa = onko;
+    }
+    
+    public void setPelaajat(String nimi1, String nimi2, String nimi3, String nimi4) {
         pelaajat.add(new Pelaaja(nimi1));
         pelaajat.add(new Pelaaja(nimi2));
         pelaajat.add(new Pelaaja(nimi3));
         pelaajat.add(new Pelaaja(nimi4));
-//        lisaaPelipari(nimi1, nimi3);
-//        lisaaPelipari(nimi2, nimi4);
+    }
+
+    public void setPeliparit(String nimi1, String nimi2, String nimi3, String nimi4) {
+        lisaaPelipari(nimi1, nimi3);
+        lisaaPelipari(nimi2, nimi4);
     }
 
     public void lisaaPelipari(String nimi1, String nimi2) {
@@ -92,28 +134,6 @@ public class Peli {
         vuorossaOlevaPelaaja = seuraavaPelaaja();
     }
     
-    public void setPassaukset(int i, boolean onko) {
-        passaukset[i] = onko;
-    }
-
-    public void lisaaKierros(int pelaaja) {
-        this.kierrokset.add(new Kierros(pelaaja));
-        this.kierrokset.get(this.kierrokset.size() - 1).lisaaTikki();
-    }
-
-    public void lisaaHuutokierrosJaKierros(int voittohuuto, int pelaaja) {
-        this.huutokierrokset.add(new Huutokierros(voittohuuto, pelaaja));
-        lisaaKierros(pelaaja);
-        asetaPassauksetFalse();
-
-    }
-
-    public void asetaPassauksetFalse() {
-        for (int i = 0; i < 4; i++) {
-            passaukset[i] = false;
-        }
-    }
-
     public int seuraavaPelaaja() {
         int seuraavaPelaaja = 1;
         while (true) {
@@ -126,27 +146,57 @@ public class Peli {
         return (vuorossaOlevaPelaaja + seuraavaPelaaja)%4;
     }
     
-    public boolean kierrosPaattynyt() {
+    
+    public void setPassaukset(int i, boolean onko) {
+        passaukset[i] = onko;
+    }
+
+    public void lisaaKierros() {
+        this.kierrokset.add(new Kierros(vuorossaOlevaPelaaja));
+        this.kierrokset.get(this.kierrokset.size() - 1).lisaaTikki();
+    }
+
+    public void lisaaHuutokierros(int voittohuuto) {
+        this.huutokierrokset.add(new Huutokierros(voittohuuto, vuorossaOlevaPelaaja));
+        asetaPassauksetFalse();
+    }
+
+    public void asetaPassauksetFalse() {
+        for (int i = 0; i < 4; i++) {
+            passaukset[i] = false;
+        }
+    }
+    
+    public boolean passauksiaKolme() {
+        int lkm = 0;
+        for (int i = 0 ; i < 4 ; i++) {
+            if (passaukset[i]) {
+                lkm++;
+            }
+        }
+        if (lkm == 3) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean paattyykoKierros() {
         if (pelaajat.get(seuraavaPelaaja()).getKasi().getKortit().isEmpty()) {
             return true;
         } else {
             return false;
         }
     }
-
-    public boolean lisaaKorttiViimeisimmanKierroksenViimeisimpaanTikkiin(int i, int pelaaja) {
-        Kierros kierros = kierrokset.get(kierrokset.size() - 1);
-        Tikki tikki = kierros.getTikit().get(kierros.getTikit().size() - 1);
-        if (tikki.lisaaKorttiTikkiin(i, pelaajat.get(pelaaja))) {
-            if (kierros.getTikit().get(kierros.getTikit().size() - 1).getKortit().size() == 4) {
-                Kortti kortti = tikki.tikinVoittavaKortti();
-                vuorossaOlevaPelaaja = tikki.getKortit().indexOf(kortti);
-                kierros.lisaaTikki();
-            }
-            return true;
-        } else {
-            return false;
-        }
+    
+    public void aloitaUusiKierros() {
+        vuorossaOlevaPelaaja = (kierrokset.size()- 1)%4;
+        kierrokset.add(new Kierros(vuorossaOlevaPelaaja));
     }
-
+    
+    public boolean vuorossaOlevaPelaajaPelaaKortin(int kortti) {
+        Kierros kierros = kierrokset.get(kierrokset.size() - 1);
+        return kierros.vuorossaOlevaPelaajaPelaaKortin(pelaajat.get(vuorossaOlevaPelaaja), kortti);
+    }
+    
 }

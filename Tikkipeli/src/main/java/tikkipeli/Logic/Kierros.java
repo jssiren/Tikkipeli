@@ -54,4 +54,18 @@ public class Kierros {
         tikit.get(tikit.size()-1).vaihdaValtti(valtti);
     }
     
+    public boolean vuorossaOlevaPelaajaPelaaKortin(Pelaaja pelaaja, int kortti) {
+        Tikki tikki = tikit.get(tikit.size()-1);
+        return tikki.vuorossaOlevaPelaajaPelaaKortin(pelaaja, kortti);
+    }
+    
+    public boolean siirrytaanSeuraavaanTikkiin() {
+        if (tikit.get(tikit.size() - 1).getKortit().size() == 4) {
+            tikit.add(new Tikki());
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
 }

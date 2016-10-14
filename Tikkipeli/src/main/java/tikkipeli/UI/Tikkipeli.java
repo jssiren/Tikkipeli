@@ -9,12 +9,12 @@ import tikkipeli.Logic.Peli;
 public class Tikkipeli extends javax.swing.JFrame {
 
     private Peli peli;
-    private boolean pelaajatLuotu;
-    private boolean huutoKierrosKaynnissa;
-    private boolean kierrosKaynnissa;
-    private boolean korttiPelattu;
-    private int passienLkm;
-    private int moneskoKierros;
+//    private boolean pelaajatLuotu;
+//    private boolean huutoKierrosKaynnissa;
+//    private boolean kierrosKaynnissa;
+//    private boolean korttiPelattu;
+//    private int passienLkm;
+//    private int moneskoKierros;
 
     /**
      * Creates new form Tikkipeli
@@ -22,11 +22,11 @@ public class Tikkipeli extends javax.swing.JFrame {
     public Tikkipeli() {
         initComponents();
         peli = new Peli();
-        pelaajatLuotu = false;
-        huutoKierrosKaynnissa = false;
-        kierrosKaynnissa = false;
-        passienLkm = 0;
-        moneskoKierros = 1;
+//        pelaajatLuotu = false;
+//        huutoKierrosKaynnissa = false;
+//        kierrosKaynnissa = false;
+//        passienLkm = 0;
+//        moneskoKierros = 1;
     }
 
     /**
@@ -44,8 +44,8 @@ public class Tikkipeli extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -227,17 +227,17 @@ public class Tikkipeli extends javax.swing.JFrame {
 
         jLabel13.setText("Pelaaja1");
 
-        jLabel14.setText("Pelaaja3");
+        jLabel14.setText("Pelaaja2");
 
-        jLabel15.setText("Pelaaja2");
+        jLabel15.setText("Pelaaja3");
 
         jLabel16.setText("Pelaaja4");
 
         jLabel21.setText("P1 kortti");
 
-        jLabel22.setText("P3 kortti");
+        jLabel22.setText("P2 kortti");
 
-        jLabel23.setText("P2 kortti");
+        jLabel23.setText("P3 kortti");
 
         jLabel24.setText("P4 kortti");
 
@@ -246,40 +246,43 @@ public class Tikkipeli extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(262, 262, 262)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel24)
+                            .addComponent(jLabel16))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(106, 106, 106)
                 .addComponent(jLabel13)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel21)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
-                .addComponent(jLabel22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addComponent(jLabel23)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(105, 105, 105))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(262, 262, 262)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel23)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel24)
-                        .addComponent(jLabel15))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabel16)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel15)
+                .addGap(152, 152, 152))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel23)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel14)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel22)
                 .addGap(52, 52, 52)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel21)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel22))
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel23))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(jLabel24)
                 .addGap(18, 18, 18)
@@ -508,14 +511,12 @@ public class Tikkipeli extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (huutoKierrosKaynnissa) {
+        if (peli.getHuutokierrosKaynnissa()) {
             int minimi = 50;
 
             if (Integer.parseInt(jLabel7.getText()) >= minimi && Integer.parseInt(jTextField5.getText()) < 0) {
                 peli.setPassaukset(peli.getVuorossaOlevaPelaaja(), true);
                 peli.siirrySeuraavaanPelaajaan();
-                passienLkm++;
-
             } else if (Integer.parseInt(jTextField5.getText()) > Integer.parseInt(jLabel7.getText()) && Integer.parseInt(jTextField5.getText()) >= minimi && Integer.parseInt(jTextField5.getText()) % 5 == 0) {
                 jLabel7.setText(jTextField5.getText());
                 peli.siirrySeuraavaanPelaajaan();
@@ -525,13 +526,15 @@ public class Tikkipeli extends javax.swing.JFrame {
             jLabel8.setText(peli.getPelaajat().get(peli.getVuorossaOlevaPelaaja()).getNimi());
             jLabel19.setText("(pelaaja kortit)");
 
-            if (passienLkm == 3) {
-                peli.lisaaHuutokierrosJaKierros(Integer.parseInt(jLabel7.getText()), peli.getVuorossaOlevaPelaaja());
-                huutoKierrosKaynnissa = false;
-                kierrosKaynnissa = true;
+            if (peli.passauksiaKolme()) {
+                peli.lisaaHuutokierros(Integer.parseInt(jLabel7.getText()));
+                peli.lisaaKierros();
+                peli.setHuutokierrosKaynnissa(false);
+                peli.setKierrosKaynnissa(true);
+
                 jLabel8.setText(peli.getPelaajat().get(peli.getVuorossaOlevaPelaaja()).getNimi());
                 jLabel19.setText(peli.getPelaajat().get(peli.getVuorossaOlevaPelaaja()).getKasi().toString());
-                passienLkm = 0;
+                peli.asetaPassauksetFalse();
 
             }
             jTextField5.setText("");
@@ -542,39 +545,42 @@ public class Tikkipeli extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        int moneskoKortti = Integer.parseInt(jTextField6.getText());
-        
-        jLabel31.setText(peli.getPelaajat().get(peli.getVuorossaOlevaPelaaja()).getKasi().getKortit().size()  + "");
-        if (moneskoKortti >=0 && peli.getPelaajat().get(peli.getVuorossaOlevaPelaaja()).getKasi().getKortit().size() > moneskoKortti) {
-            if (kierrosKaynnissa && !korttiPelattu && peli.lisaaKorttiViimeisimmanKierroksenViimeisimpaanTikkiin(moneskoKortti, peli.getVuorossaOlevaPelaaja())) {
+        if (!jTextField6.getText().matches("") && !peli.getKorttiPelattu()) {
+            int moneskoKortti = Integer.parseInt(jTextField6.getText());
 
-                if (peli.getVuorossaOlevaPelaaja() % 4 == 0) {
-                    jLabel21.setText(peli.getPelaajat().get(peli.getVuorossaOlevaPelaaja()).getKasi().getKortit().get(moneskoKortti).toString());
-                } else if (peli.getVuorossaOlevaPelaaja() % 4 == 1) {
-                    jLabel23.setText(peli.getPelaajat().get(peli.getVuorossaOlevaPelaaja()).getKasi().getKortit().get(moneskoKortti).toString());
-                } else if (peli.getVuorossaOlevaPelaaja() % 4 == 2) {
-                    jLabel22.setText(peli.getPelaajat().get(peli.getVuorossaOlevaPelaaja()).getKasi().getKortit().get(moneskoKortti).toString());
-                } else {
-                    jLabel24.setText(peli.getPelaajat().get(peli.getVuorossaOlevaPelaaja()).getKasi().getKortit().get(moneskoKortti).toString());
+            jLabel31.setText(peli.getPelaajat().get(peli.getVuorossaOlevaPelaaja()).getKasi().getKortit().size() + "");
+
+            if (moneskoKortti >= 0 && peli.getPelaajat().get(peli.getVuorossaOlevaPelaaja()).getKasi().getKortit().size() > moneskoKortti) {
+                String pelattavaKortti = peli.getPelaajat().get(peli.getVuorossaOlevaPelaaja()).getKasi().getKortit().get(moneskoKortti).toString();
+                if (peli.getKierrosKaynnissa() && peli.vuorossaOlevaPelaajaPelaaKortin(moneskoKortti)) {
+                    if (peli.getVuorossaOlevaPelaaja() % 4 == 0) {
+                        jLabel21.setText(pelattavaKortti);
+                    } else if (peli.getVuorossaOlevaPelaaja() % 4 == 1) {
+                        jLabel22.setText(pelattavaKortti);
+                    } else if (peli.getVuorossaOlevaPelaaja() % 4 == 2) {
+                        jLabel23.setText(pelattavaKortti);
+                    } else {
+                        jLabel24.setText(pelattavaKortti);
+                    }
+                    peli.setKorttiPelattu(true);
+                    jLabel19.setText("");
                 }
-                korttiPelattu = true;
-                peli.siirrySeuraavaanPelaajaan();
-                jLabel19.setText("");
             }
-
+            jTextField6.setText("");
         }
 
-        jTextField6.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        if (!pelaajatLuotu && !jTextField1.equals("") && !jTextField2.equals("") && !jTextField3.equals("") && !jTextField4.equals("")) {
-            huutoKierrosKaynnissa = true;
-            peli.setPeliparit(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText());
+        if (!peli.getPelaajatLuotu() && !jTextField1.getText().equals("") && !jTextField2.getText().equals("") && !jTextField3.getText().equals("") && !jTextField4.getText().equals("")) {
+            peli.setHuutokierrosKaynnissa(true);
+            peli.setPelaajat(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText());
+
+            // peli.setPeliparit(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText());
             jLabel13.setText(peli.getPelaajat().get(0).getNimi());
-            jLabel14.setText(peli.getPelaajat().get(2).getNimi());
-            jLabel15.setText(peli.getPelaajat().get(1).getNimi());
+            jLabel14.setText(peli.getPelaajat().get(1).getNimi());
+            jLabel15.setText(peli.getPelaajat().get(2).getNimi());
             jLabel16.setText(peli.getPelaajat().get(3).getNimi());
 
             peli.jaaPelaajilleKortit();
@@ -583,7 +589,7 @@ public class Tikkipeli extends javax.swing.JFrame {
 
             jLabel4.setText(peli.getPelaajat().get(peli.getVuorossaOlevaPelaaja()).getNimi());
 
-            pelaajatLuotu = true;
+            peli.setPelaajatLuotu(true);
             jLabel27.setText(peli.getPelaajat().get(0).getNimi() + " " + peli.getPelaajat().get(0).getKasi().toString());
             jLabel28.setText(peli.getPelaajat().get(1).getNimi() + " " + peli.getPelaajat().get(1).getKasi().toString());
             jLabel29.setText(peli.getPelaajat().get(2).getNimi() + " " + peli.getPelaajat().get(2).getKasi().toString());
@@ -600,10 +606,11 @@ public class Tikkipeli extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        if (korttiPelattu) {
+        if (peli.getKorttiPelattu()) {
+            peli.siirrySeuraavaanPelaajaan();
             jLabel8.setText(peli.getPelaajat().get(peli.getVuorossaOlevaPelaaja()).getNimi());
             jLabel19.setText(peli.getPelaajat().get(peli.getVuorossaOlevaPelaaja()).getKasi().toString());
-            korttiPelattu = false;
+            peli.setKorttiPelattu(false);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 

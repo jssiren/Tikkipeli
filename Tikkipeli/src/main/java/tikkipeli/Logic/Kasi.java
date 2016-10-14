@@ -47,15 +47,16 @@ public class Kasi {
     /**
      * Kortti poistetaan kädestä kun se pelataan.
      * @param poistettava
+     * @return
      */
-    public void poistaKorttiKadesta(Kortti poistettava) {
-        if (kortit.contains(poistettava)) {
-            kortit.remove(kortit.indexOf(poistettava));
+    public boolean poistaKorttiKadesta(int poistettava) {
+        if(kortit.isEmpty()) {
+            return false;
+        } else {
+            kortit.remove(poistettava);
+            return true;
         }
-    }
-    
-    public void poistaKorttiKadesta2(int i) {
-        kortit.remove(i);
+        
     }
     
     @Override

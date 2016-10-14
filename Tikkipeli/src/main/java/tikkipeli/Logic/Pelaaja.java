@@ -27,8 +27,12 @@ public class Pelaaja {
         return this.kasi;
     }
     
-    public void poistaKorttiPelaajanKadesta(Kortti kortti) {
-        kasi.poistaKorttiKadesta(kortti);
+    public boolean poistaKortti(int kortti) {
+        if(kasi.poistaKorttiKadesta(kortti)) {
+            return true;
+        } else {
+            return false;
+        }
     }
     
     public void kortitJarjestykseen() {
@@ -43,6 +47,15 @@ public class Pelaaja {
     public void poistaKortit() {
         kasi.poistaKortit();
     }
+    
+    public boolean equals(Pelaaja pelaaja) {
+        if(this.nimi.matches(pelaaja.getNimi())) {
+            return true;
+        } else {
+            return true;
+        }
+    }
+    
     
     
 }
