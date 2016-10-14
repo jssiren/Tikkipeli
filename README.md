@@ -2,6 +2,8 @@
 
 ## Dokumentaatio
 
+[käyttöohje](dokumentaatio/Käyttöohje.md)
+
 [aiheen kuvaus](dokumentaatio/aiheenKuvausJaRakenne.md)
 
 [tuntikirjanpito](dokumentaatio/Tuntikirjanpito.md)
