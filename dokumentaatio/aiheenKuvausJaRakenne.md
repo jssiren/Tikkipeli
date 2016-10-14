@@ -21,6 +21,8 @@ K‰yttˆliittym‰n‰ toimii yksi ruutu, josta n‰hd‰‰n koko ajan kaikki.
 ![luokkakaavio](/dokumentaatio/401b1624.png "Luokkakaavio1")
 
 
+###Rakennekuvaus:
+Peli koostuu pakasta, nelj‰st‰ pelaajasta ja pelattavista kierroksista. Pelaajat luodaa ja heille asetetaan kierroksen alussa aina uudet kortit k‰teen. Pelaaja vuorollaa pelaa yhden kortin tikkiin, joka sis‰lt‰‰ enint‰‰n 4 korttia. Tikin voittaja jatkaa peli‰ ja ikist‰ saa pisteit‰.
 ###Sekvenssiokaavio 1:
 ![sekvenssikaavio](/dokumentaatio/sekvenssikaavio1.PNG "Kortin pelaaminen tikkiin")
 
