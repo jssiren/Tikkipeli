@@ -14,13 +14,15 @@ K‰yttˆliittym‰n‰ toimii yksi ruutu, josta n‰hd‰‰n koko ajan kaikki.
 **Kaikkien k‰ytt‰jien toiminnot**:
 - Nimien asettaminen pelaajille
 - Pelikortin pelaaminen 
-- Huutokaupassa teht‰v‰ "huuto" tai passauss
+- Huutokaupassa teht‰v‰ "huuto" tai passaus
 - Valtin tai puolikkaan kysyminen
 
 ###Luokkakaavio:
-![luokkakaavio](/dokumentaatio/401b1624.png "Luokkakaavio")
+![luokkakaavio](/dokumentaatio/401b1624.png "Luokkakaavio1")
 
 
-###Sekvenssiokaatiot:
-![sekvkaavio1](/dokumentaatio/sekvenssikaavio1.png "Kortin pelaaminen tikkiin")
-![sekvkaavio2](/dokumentaatio/sekvenssikaavio2.png "Voiko kortin ylip‰‰t‰ns‰ pelata")
+###Sekvenssiokaavio 1:
+![sekvenssikaavio](/dokumentaatio/sekvenssikaavio1.png "Kortin pelaaminen tikkiin")
+
+###Sekvenssiokaavio 2:
+![sekvenssikaavio](/dokumentaatio/sekvenssikaavio2.png "Voiko kortin ylip‰‰t‰ns‰ pelata")
