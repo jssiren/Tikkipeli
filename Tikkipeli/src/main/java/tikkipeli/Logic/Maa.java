@@ -8,16 +8,22 @@ package tikkipeli.Logic;
 */
 
 public enum Maa {
-    HERTTA(100), RUUTU(80), RISTI(60), PATA(40);
+    HERTTA(100,"He"), RUUTU(80,"Ru"), RISTI(60,"Ri"), PATA(40,"Pa"), TYHJA(0,"X");
     
     private final int arvo;
+    private final String lyhenne;
     
-    private Maa(int arvo) {
+    private Maa(int arvo, String lyhenne) {
         this.arvo = arvo;
+        this.lyhenne = lyhenne;
     }
     
     public int getValtinArvo() {
         return arvo;
+    }
+    
+    public String getLyhenne() {
+        return lyhenne;
     }
     
 }

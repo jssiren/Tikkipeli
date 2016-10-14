@@ -39,4 +39,16 @@ public class Pelipari {
         return parinPelaajat[0].getNimi() + " " + parinPelaajat[1].getNimi() + " " + pisteet;
     }
     
+    public void jarjestaPelaajienKortit() {
+        for (Pelaaja pelaaja : parinPelaajat) {
+            pelaaja.kortitJarjestykseen();
+        }
+    }
+    
+    public void poistaPelaajienKortit() {
+        for (Pelaaja pelaaja : parinPelaajat) {
+            pelaaja.poistaKortit();
+        }
+    }
+    
 }

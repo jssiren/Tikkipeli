@@ -20,7 +20,7 @@ public class Kortti implements Comparable<Kortti> {
 
     @Override
     public String toString() {
-        return this.maa + " " + this.arvo + " ";
+        return maa.getLyhenne() + "" + arvo.toString();
     }
 
     public Maa getMaa() {

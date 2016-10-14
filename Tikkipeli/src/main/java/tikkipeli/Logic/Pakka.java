@@ -11,8 +11,10 @@ public class Pakka {
 
         for (Maa maa : Maa.values()) {
             for (KortinArvo arvo : KortinArvo.values()) {
-                Kortti kortti1 = new Kortti(maa, arvo);
-                this.kortit.add(kortti1);
+                if (!maa.equals(Maa.TYHJA)) {
+                    this.kortit.add(new Kortti(maa, arvo));
+                }
+                
             }
         }
     }
@@ -38,41 +40,6 @@ public class Pakka {
 
     public void jarjestaPakka() {
         Collections.sort(kortit);
-    }
-
-    /*
-    * Metodi sekoittaa pakan, ja palauttaa listan neljästä
-    * yhdeksän kortin kädestä.
-    */
-    public List jaaPakkaNeljaan() {
-        sekoitaPakka();
-        ArrayList<Kasi> pakat = new ArrayList<Kasi>();
-        Kasi kasi1 = new Kasi();
-        Kasi kasi2 = new Kasi();
-        Kasi kasi3 = new Kasi();
-        Kasi kasi4 = new Kasi();
-        int i = 0;
-        for (Kortti kortti : this.kortit) {
-            if (i % 4 == 0) {
-                kasi1.lisaaKorttiKateen(kortti);
-            } else if (i % 4 == 1) {
-                kasi2.lisaaKorttiKateen(kortti);
-            } else if (i % 4 == 2) {
-                kasi3.lisaaKorttiKateen(kortti);
-            } else if (i % 4 == 3) {
-                kasi4.lisaaKorttiKateen(kortti);
-            }
-            i++;
-        }
-        kasi1.kortitJarjestykseen();
-        kasi2.kortitJarjestykseen();
-        kasi3.kortitJarjestykseen();
-        kasi4.kortitJarjestykseen();
-        pakat.add(kasi1);
-        pakat.add(kasi2);
-        pakat.add(kasi3);
-        pakat.add(kasi4);
-        return pakat;
     }
 
 }

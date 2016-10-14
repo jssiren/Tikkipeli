@@ -1,22 +1,47 @@
 package tikkipeli.Logic;
 
+import java.util.*;
+
 public class Kierros {
-    private Tikki[] tikit;
-    private Pelaaja[] tikinVoittavaPelaaja;
+    private ArrayList<Tikki> tikit;
+    private ArrayList<Pelaaja> tikinVoittavaPelaaja;
     private Maa valtti;
+    private int huudonVoittaja;
     
-    public Kierros() {
-        tikit = new Tikki[9];
-        tikinVoittavaPelaaja = new Pelaaja[9];
-        valtti = null;
+    public Kierros(int pelaaja) {
+        tikit = new ArrayList<>();
+        tikinVoittavaPelaaja = new ArrayList<>();
+        valtti = Maa.TYHJA;
+        huudonVoittaja = pelaaja;
     }
     
-    public Tikki[] getTikit() {
+    public ArrayList<Tikki> getTikit() {
         return tikit;
     }
     
-    public Pelaaja[] getVoittavatPelaajat() {
+    public ArrayList<Pelaaja> getVoittavatPelaajat() {
         return tikinVoittavaPelaaja;
+    }
+    
+    public Maa getValtti() {
+        return valtti;
+    }
+    
+    public int getHuudonVoittaja() {
+        return huudonVoittaja;
+    }
+    
+    
+    public void setHuudonVoittaja(int pelaaja) {
+        huudonVoittaja = pelaaja;
+    }
+    
+    public void lisaaTikki() {
+        tikit.add(new Tikki());
+    }
+    
+    public void lisaaVoittavaPelaaja(Pelaaja pelaaja) {
+        tikinVoittavaPelaaja.add(pelaaja);
     }
     
     /*
@@ -26,6 +51,7 @@ public class Kierros {
     */
     public void vaihdaValtti(Maa maa) {
         valtti = maa;
+        tikit.get(tikit.size()-1).vaihdaValtti(valtti);
     }
     
 }

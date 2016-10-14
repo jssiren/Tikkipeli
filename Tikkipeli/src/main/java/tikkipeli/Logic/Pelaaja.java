@@ -40,5 +40,9 @@ public class Pelaaja {
         return this.nimi + " " + this.kasi.toString();
     }
     
+    public void poistaKortit() {
+        kasi.poistaKortit();
+    }
+    
     
 }
