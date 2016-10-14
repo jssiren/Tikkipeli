@@ -22,7 +22,7 @@ K‰yttˆliittym‰n‰ toimii yksi ruutu, josta n‰hd‰‰n koko ajan kaikki.
 
 
 ###Sekvenssiokaavio 1:
-![sekvenssikaavio](/dokumentaatio/sekvenssikaavio1.png "Kortin pelaaminen tikkiin")
+![sekvenssikaavio](/dokumentaatio/sekvenssikaavio1.PNG "Kortin pelaaminen tikkiin")
 
 ###Sekvenssiokaavio 2:
-![sekvenssikaavio](/dokumentaatio/sekvenssikaavio2.png "Voiko kortin ylip‰‰t‰ns‰ pelata")
+![sekvenssikaavio](/dokumentaatio/sekvenssikaavio2.PNG "Voiko kortin ylip‰‰t‰ns‰ pelata")
