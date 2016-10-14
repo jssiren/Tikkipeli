@@ -5,36 +5,47 @@
 <link type="text/css" rel="stylesheet" href="../../stylesheet.css" />
 </head>
 <body>
-<div id="overview"><a href="../../../apidocs/tikkipeli/Logic/KortinArvo.html">View Javadoc</a></div><pre>
-<a class="jxr_linenumber" name="L1" href="#L1">1</a>   <strong class="jxr_keyword">package</strong> tikkipeli.Logic;
+<div id="overview"><a href="../../../apidocs/tikkipeli/logic/KortinArvo.html">View Javadoc</a></div><pre>
+<a class="jxr_linenumber" name="L1" href="#L1">1</a>   <strong class="jxr_keyword">package</strong> tikkipeli.logic;
 <a class="jxr_linenumber" name="L2" href="#L2">2</a>   
-<a class="jxr_linenumber" name="L3" href="#L3">3</a>   <em class="jxr_comment">/*</em>
-<a class="jxr_linenumber" name="L4" href="#L4">4</a>   <em class="jxr_comment">* KortinArvo on tehty enumiksi sillä kymppi on Tikkipelissä järjestyksessä</em>
-<a class="jxr_linenumber" name="L5" href="#L5">5</a>   <em class="jxr_comment">* toiseksi suurin kortti, Ässän jälkeen. Aina kun haetaan kortin arvoa</em>
-<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <em class="jxr_comment">* ja selvitetään tikin voittanutta korttia ei näin ollen tarvitse erikseen</em>
-<a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment">* asettaa lisäehtoa ottamaan huomioon onko kymppi pelattu tikkiin vai ei.</em>
-<a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment">*/</em>
-<a class="jxr_linenumber" name="L9" href="#L9">9</a>   <strong class="jxr_keyword">public</strong> enum <a href="../../tikkipeli/Logic/KortinArvo.html">KortinArvo</a> {
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>      k6(<span class="jxr_string">"6"</span>, 6), k7(<span class="jxr_string">"7"</span>, 7), k8(<span class="jxr_string">"8"</span>, 8), k9(<span class="jxr_string">"9"</span>, 9), k10(<span class="jxr_string">"10"</span>, 14), kJ(<span class="jxr_string">"J"</span>, 11), kQ(<span class="jxr_string">"Q"</span>, 12), kK(<span class="jxr_string">"K"</span>, 13), kA(<span class="jxr_string">"A"</span>, 15);
-<a class="jxr_linenumber" name="L11" href="#L11">11</a>  
-<a class="jxr_linenumber" name="L12" href="#L12">12</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> arvo;
-<a class="jxr_linenumber" name="L13" href="#L13">13</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> String arvoString;
-<a class="jxr_linenumber" name="L14" href="#L14">14</a>  
-<a class="jxr_linenumber" name="L15" href="#L15">15</a>      <strong class="jxr_keyword">private</strong> <a href="../../tikkipeli/Logic/KortinArvo.html">KortinArvo</a>(String blaa, <strong class="jxr_keyword">int</strong> arvo) {
-<a class="jxr_linenumber" name="L16" href="#L16">16</a>          <strong class="jxr_keyword">this</strong>.arvoString = blaa;
-<a class="jxr_linenumber" name="L17" href="#L17">17</a>          <strong class="jxr_keyword">this</strong>.arvo = arvo;
-<a class="jxr_linenumber" name="L18" href="#L18">18</a>      }
-<a class="jxr_linenumber" name="L19" href="#L19">19</a>      
-<a class="jxr_linenumber" name="L20" href="#L20">20</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">int</strong> getKortinArvo() {
-<a class="jxr_linenumber" name="L21" href="#L21">21</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>.arvo;
-<a class="jxr_linenumber" name="L22" href="#L22">22</a>      }
-<a class="jxr_linenumber" name="L23" href="#L23">23</a>      
-<a class="jxr_linenumber" name="L24" href="#L24">24</a>      @Override
-<a class="jxr_linenumber" name="L25" href="#L25">25</a>      <strong class="jxr_keyword">public</strong> String toString() {
-<a class="jxr_linenumber" name="L26" href="#L26">26</a>          <strong class="jxr_keyword">return</strong> arvoString;
-<a class="jxr_linenumber" name="L27" href="#L27">27</a>      }
-<a class="jxr_linenumber" name="L28" href="#L28">28</a>  
-<a class="jxr_linenumber" name="L29" href="#L29">29</a>  }
+<a class="jxr_linenumber" name="L3" href="#L3">3</a>   <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L4" href="#L4">4</a>   <em class="jxr_javadoccomment"> * KortinArvo on tehty enumiksi sillä kymppi on Tikkipelissä järjestyksessä</em>
+<a class="jxr_linenumber" name="L5" href="#L5">5</a>   <em class="jxr_javadoccomment"> * toiseksi suurin kortti, Ässän jälkeen. Aina kun haetaan kortin arvoa</em>
+<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <em class="jxr_javadoccomment"> * ja selvitetään tikin voittanutta korttia ei näin ollen tarvitse erikseen</em>
+<a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_javadoccomment"> * asettaa lisäehtoa ottamaan huomioon onko kymppi pelattu tikkiin vai ei.</em>
+<a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_javadoccomment"> * @author janne</em>
+<a class="jxr_linenumber" name="L9" href="#L9">9</a>   <em class="jxr_javadoccomment"> */</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  
+<a class="jxr_linenumber" name="L11" href="#L11">11</a>  <strong class="jxr_keyword">public</strong> enum <a href="../../tikkipeli/logic/KortinArvo.html">KortinArvo</a> {
+<a class="jxr_linenumber" name="L12" href="#L12">12</a>      k6(<span class="jxr_string">"6"</span>, 6), k7(<span class="jxr_string">"7"</span>, 7), k8(<span class="jxr_string">"8"</span>, 8), k9(<span class="jxr_string">"9"</span>, 9), k10(<span class="jxr_string">"10"</span>, 14), kJ(<span class="jxr_string">"J"</span>, 11), kQ(<span class="jxr_string">"Q"</span>, 12), kK(<span class="jxr_string">"K"</span>, 13), kA(<span class="jxr_string">"A"</span>, 15);
+<a class="jxr_linenumber" name="L13" href="#L13">13</a>  
+<a class="jxr_linenumber" name="L14" href="#L14">14</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> arvo;
+<a class="jxr_linenumber" name="L15" href="#L15">15</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> String arvoString;
+<a class="jxr_linenumber" name="L16" href="#L16">16</a>  
+<a class="jxr_linenumber" name="L17" href="#L17">17</a>      <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L18" href="#L18">18</a>  <em class="jxr_javadoccomment">     * Kortin arvo määräytyy sen arvosta.</em>
+<a class="jxr_linenumber" name="L19" href="#L19">19</a>  <em class="jxr_javadoccomment">     * @param blaa On arvon string</em>
+<a class="jxr_linenumber" name="L20" href="#L20">20</a>  <em class="jxr_javadoccomment">     * @param arvo On arvon numeroArvo</em>
+<a class="jxr_linenumber" name="L21" href="#L21">21</a>  <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L22" href="#L22">22</a>      <strong class="jxr_keyword">private</strong> <a href="../../tikkipeli/logic/KortinArvo.html">KortinArvo</a>(String blaa, <strong class="jxr_keyword">int</strong> arvo) {
+<a class="jxr_linenumber" name="L23" href="#L23">23</a>          <strong class="jxr_keyword">this</strong>.arvoString = blaa;
+<a class="jxr_linenumber" name="L24" href="#L24">24</a>          <strong class="jxr_keyword">this</strong>.arvo = arvo;
+<a class="jxr_linenumber" name="L25" href="#L25">25</a>      }
+<a class="jxr_linenumber" name="L26" href="#L26">26</a>  
+<a class="jxr_linenumber" name="L27" href="#L27">27</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">int</strong> getKortinArvo() {
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>.arvo;
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>      }
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>  
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>      <strong class="jxr_keyword">public</strong> String getKortinArvoString() {
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>          <strong class="jxr_keyword">return</strong> arvoString;
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>      }
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>  
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>      @Override
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>      <strong class="jxr_keyword">public</strong> String toString() {
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>          <strong class="jxr_keyword">return</strong> arvoString;
+<a class="jxr_linenumber" name="L38" href="#L38">38</a>      }
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>  
+<a class="jxr_linenumber" name="L40" href="#L40">40</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2016. All rights reserved.</div>

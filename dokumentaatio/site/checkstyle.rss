@@ -26,7 +26,7 @@ under the License.
     <copyright>&#169;2016</copyright>
     <item>
       <title>File: 12,
-             Errors: 42,
+             Errors: 1,
              Warnings: 0,
              Infos: 0
       </title>
@@ -46,7 +46,7 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#tikkipeli.Logic.Maa.java">tikkipeli/Logic/Maa.java</a>
+                  <a href="${project.url}/checkstyle.html#tikkipeli.logic.Peli.java">tikkipeli/logic/Peli.java</a>
                 </td>
                 <td>
                   0
@@ -60,91 +60,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#tikkipeli.Logic.Pelaaja.java">tikkipeli/Logic/Pelaaja.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  4
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#tikkipeli.Logic.Tikki.java">tikkipeli/Logic/Tikki.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  4
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#tikkipeli.Logic.Kasi.java">tikkipeli/Logic/Kasi.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  5
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#tikkipeli.Logic.Kierros.java">tikkipeli/Logic/Kierros.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  3
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#tikkipeli.Logic.Pelipari.java">tikkipeli/Logic/Pelipari.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  3
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#tikkipeli.Logic.Kortti.java">tikkipeli/Logic/Kortti.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  2
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#tikkipeli.UI.Main.java">tikkipeli/UI/Main.java</a>
+                  <a href="${project.url}/checkstyle.html#tikkipeli.logic.Pelipari.java">tikkipeli/logic/Pelipari.java</a>
                 </td>
                 <td>
                   0
@@ -158,7 +74,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#tikkipeli.Logic.Peli.java">tikkipeli/Logic/Peli.java</a>
+                  <a href="${project.url}/checkstyle.html#tikkipeli.logic.Kortti.java">tikkipeli/logic/Kortti.java</a>
                 </td>
                 <td>
                   0
@@ -167,12 +83,12 @@ under the License.
                   0
                 </td>
                 <td>
-                  6
+                  0
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#tikkipeli.Logic.Tikkilogiikka.java">tikkipeli/Logic/Tikkilogiikka.java</a>
+                  <a href="${project.url}/checkstyle.html#tikkipeli.logic.Pelaaja.java">tikkipeli/logic/Pelaaja.java</a>
                 </td>
                 <td>
                   0
@@ -181,12 +97,12 @@ under the License.
                   0
                 </td>
                 <td>
-                  7
+                  0
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#tikkipeli.Logic.KortinArvo.java">tikkipeli/Logic/KortinArvo.java</a>
+                  <a href="${project.url}/checkstyle.html#tikkipeli.logic.Tikki.java">tikkipeli/logic/Tikki.java</a>
                 </td>
                 <td>
                   0
@@ -195,12 +111,12 @@ under the License.
                   0
                 </td>
                 <td>
-                  1
+                  0
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#tikkipeli.Logic.Pakka.java">tikkipeli/Logic/Pakka.java</a>
+                  <a href="${project.url}/checkstyle.html#tikkipeli.logic.Kierros.java">tikkipeli/logic/Kierros.java</a>
                 </td>
                 <td>
                   0
@@ -209,7 +125,91 @@ under the License.
                   0
                 </td>
                 <td>
-                  6
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#tikkipeli.logic.Huutokierros.java">tikkipeli/logic/Huutokierros.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#tikkipeli.logic.Pakka.java">tikkipeli/logic/Pakka.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#tikkipeli.logic.Maa.java">tikkipeli/logic/Maa.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#tikkipeli.logic.Kasi.java">tikkipeli/logic/Kasi.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#tikkipeli.ui.Tikkipeli.java">tikkipeli/ui/Tikkipeli.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#tikkipeli.logic.KortinArvo.java">tikkipeli/logic/KortinArvo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
                 </td>
               </tr>
                       </tbody>
