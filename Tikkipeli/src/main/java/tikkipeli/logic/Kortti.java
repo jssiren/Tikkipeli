@@ -8,10 +8,9 @@ package tikkipeli.logic;
  */
 public class Kortti implements Comparable<Kortti> {
 
-    private Maa maa;
-    private KortinArvo arvo;
-    private int pisteet;
-
+    private final Maa maa;
+    private final KortinArvo arvo;
+    
     /**
      * Kortti tietää mitä maata on ja minkä arvoinen on.
      * @param maa Kortin maa
@@ -20,13 +19,6 @@ public class Kortti implements Comparable<Kortti> {
     public Kortti(Maa maa, KortinArvo arvo) {
         this.maa = maa;
         this.arvo = arvo;
-        KortinArvo j = arvo;
-        this.pisteet = 0;
-        if (j.getKortinArvo() >= 11 && j.getKortinArvo() <= 13) {
-            this.pisteet = 5;
-        } else if (j.getKortinArvo() >= 14 && j.getKortinArvo() <= 15) {
-            this.pisteet = 10;
-        }
     }
 
     @Override
@@ -43,21 +35,9 @@ public class Kortti implements Comparable<Kortti> {
     }
 
     public int getPisteet() {
-        return this.pisteet;
+        return this.arvo.getKortinArvonPisteet();
     }
 
-    public void setPisteet(int pisteet) {
-        this.pisteet = pisteet;
-    }
-
-    public void setMaa(Maa maa) {
-        this.maa = maa;
-    }
-
-    public void setArvo(KortinArvo arvo) {
-        this.arvo = arvo;
-    }
-    
     /**
      * Metodin avulla määritetään ovatko kortit samoja.
      * 

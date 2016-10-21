@@ -7,25 +7,17 @@ package tikkipeli.logic;
  */
 public class Pelaaja {
 
-    private Kasi kasi;
-    private String nimi;
+    private final Kasi kasi;
+    private final String nimi;
 
     /**
      * Pelaaja muistaa nimensä ja kätensä.
      *
-     * @param nimi Pelaajan nimi
+     * @param nimi1 Pelaajan nimi
      */
-    public Pelaaja(String nimi) {
+    public Pelaaja(String nimi1) {
         this.kasi = new Kasi();
-        this.nimi = nimi;
-    }
-
-    public void setNimi(String nimi) {
-        this.nimi = nimi;
-    }
-
-    public void setKasi(Kasi kasi) {
-        this.kasi = kasi;
+        this.nimi = nimi1;
     }
 
     public String getNimi() {
@@ -40,9 +32,11 @@ public class Pelaaja {
      * Metodi lisää pelaajan käteen parametrina annetun kortin.
      *
      * @param kortti kortti joka lisätään
+     *
+     * @return tosi mikäli käteen voi lisätä kortin
      */
-    public void lisaaKorttiKateen(Kortti kortti) {
-        kasi.lisaaKorttiKateen(kortti);
+    public boolean lisaaKorttiKateen(Kortti kortti) {
+        return kasi.lisaaKorttiKateen(kortti);
     }
 
     /**
@@ -51,39 +45,36 @@ public class Pelaaja {
      *
      * @param kortti Poistettava kortti
      *
-     * @see tikkipeli.logic.Kasi#poistaKortit() 
+     * @see tikkipeli.logic.Kasi#poistaKortit()
      *
      * @return tosi jos poisto onnistui, epätosi jos epäonnistui
      */
     public boolean poistaKortti(Kortti kortti) {
-        if (kasi.poistaKorttiKadesta(kortti)) {
-            return true;
-        } else {
-            return false;
-        }
+        return kasi.poistaKorttiKadesta(kortti);
     }
 
     /**
      * Metodi asettaa kädessä olevat kortit järjestykseen.
      *
-     * @see tikkipeli.logic.Kasi#kortitJarjestykseen() 
+     * @see tikkipeli.logic.Kasi#kortitJarjestykseen()
      */
     public void kortitJarjestykseen() {
-        this.kasi.kortitJarjestykseen();
+        kasi.kortitJarjestykseen();
     }
 
-    @Override
-    public String toString() {
-        return this.nimi + " " + this.kasi.toString();
-    }
-
+//    @Override
+//    public String toString() {
+//        return this.nimi;
+//    }
     /**
      * Metodi poistaa pelaajan kädessä olevat kortit, eli tyhjentää käden.
      *
-     * @see tikkipeli.logic.Kasi#poistaKortit() 
+     * @see tikkipeli.logic.Kasi#poistaKortit()
+     *
+     * @return tosi, mikäli kortit poistetaan
      */
-    public void poistaKortit() {
-        kasi.poistaKortit();
+    public boolean poistaKortit() {
+        return kasi.poistaKortit();
     }
 
     /**
@@ -93,10 +84,11 @@ public class Pelaaja {
      * @return tosi jos pelaajat ovat samoja, epätos muulloin
      */
     public boolean equals(Pelaaja pelaaja) {
-        if (this.nimi.matches(pelaaja.getNimi())) {
+        if (this.nimi.matches(pelaaja.getNimi()) && kasi.equals(pelaaja.getKasi())) {
             return true;
+
         } else {
-            return true;
+            return false;
         }
     }
 

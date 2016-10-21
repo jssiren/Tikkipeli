@@ -1,13 +1,8 @@
 # Tikkipeli
 
 ## Dokumentaatio
-
-[käyttöohje](dokumentaatio/Käyttöohje.md)
-
-[aiheen kuvaus](dokumentaatio/aiheenKuvausJaRakenne.md)
-
-[tuntikirjanpito](dokumentaatio/Tuntikirjanpito.md)
-
-https://htmlpreview.github.io/?https://github.com/jssiren/Tikkipeli/blob/master/dokumentaatio/pit/201610210426/index.html
-
-https://htmlpreview.github.io/?https://github.com/jssiren/Tikkipeli/blob/master/dokumentaatio/site/checkstyle.html
+- [Käyttöohje](dokumentaatio/Käyttöohje.md)
+- [Aiheen kuvaus ja rakenne](dokumentaatio/aiheenKuvausJaRakenne.md)
+- [Tuntikirjanpito](dokumentaatio/Tuntikirjanpito.md)
+- [PIT](https://htmlpreview.github.io/?https://github.com/jssiren/Tikkipeli/blob/master/dokumentaatio/pit/201610212058/index.html)
+- [CheckStyle](https://htmlpreview.github.io/?https://github.com/jssiren/Tikkipeli/blob/master/dokumentaatio/site/checkstyle.html)

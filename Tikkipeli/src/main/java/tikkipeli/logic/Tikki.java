@@ -10,8 +10,8 @@ import java.util.*;
  */
 public class Tikki {
 
-    private ArrayList<Kortti> kortit;
-    private ArrayList<Pelaaja> pelaajat;
+    private final ArrayList<Kortti> kortit;
+    private final ArrayList<Pelaaja> pelaajat;
 
     /**
      * Tikki on lista kortteja ja pelaajia joka muistaa mikä maa on valttia.
@@ -24,13 +24,9 @@ public class Tikki {
     public ArrayList<Kortti> getKortit() {
         return kortit;
     }
-    
+
     public ArrayList<Pelaaja> getPelaajat() {
         return pelaajat;
-    }
-    
-    public void setKortit(ArrayList<Kortti> korvaaja) {
-        kortit = korvaaja;
     }
 
     /**
@@ -68,6 +64,8 @@ public class Tikki {
         Kortti pelattavaKortti = kortti;
         if (kortit.isEmpty()) {
             return true;
+        } else if (kortit.contains(kortti)) {
+            return false;
         } else {
             Kortti tikinJohtavaKortti = tikinVoittavaKortti();
             if (pelaajanKasi.loytyykoKadestaSamaaMaataJaIsompaa(tikinJohtavaKortti)) {
@@ -90,11 +88,16 @@ public class Tikki {
      * @return pisteet
      */
     public int tikinPisteet() {
-        int pisteet = 0;
-        for (Kortti kortti : kortit) {
-            pisteet += kortti.getPisteet();
+        if (kortit.isEmpty()) {
+            return 0;
+        } else {
+            int pisteet = 0;
+            for (Kortti kortti : kortit) {
+                pisteet += kortti.getPisteet();
+            }
+            return pisteet;
         }
-        return pisteet;
+
     }
 
     /**
@@ -107,7 +110,33 @@ public class Tikki {
      */
     public boolean vuorossaOlevaPelaajaPelaaKortin(Pelaaja pelaaja, Kortti kortti) {
         if (voikoKortinPelataTikkiin(kortti, pelaaja) && pelaaja.poistaKortti(kortti)) {
+            lisaaKorttiTikkiin(kortti);
+            lisaaKortinPelannutPelaaja(pelaaja);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Metodi lisää kortin tikkiin.
+     *
+     * @param kortti Tikkiin lisattava kortti
+     */
+    public void lisaaKorttiTikkiin(Kortti kortti) {
+        if (!this.kortit.contains(kortti)) {
             kortit.add(kortti);
+        }
+    }
+
+    /**
+     * Metodi lisää pelaajan listalle.
+     *
+     * @param pelaaja Lisättävä pelaaja
+     * @return tosi, mikäli pelaajan voi lisata
+     */
+    public boolean lisaaKortinPelannutPelaaja(Pelaaja pelaaja) {
+        if (!pelaajat.contains(pelaaja)) {
             pelaajat.add(pelaaja);
             return true;
         } else {

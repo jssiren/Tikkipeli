@@ -10,3 +10,4 @@ Päivä | Tunnit | Kuvaus
 14.10.2016 | 6h | Tikkilogiikan kehittämistä, käyttöliittymän hienosäätöä
 19.10.2016 | 6h | Käyttöliittymän hienosäätöä
 20.10.2016 | 6h | Käyttöliittymän hienosäätöä
+21.10.2016 | 6h | Käyttöliittymän ja luokkien hienosäätöä, dokumentaation päivittämistä, testin tekemistä

@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class Kasi {
 
-    private ArrayList<Kortti> kortit;
+    private final ArrayList<Kortti> kortit;
 
     /**
      * Käsi on oleellisesti vain lista kortteja.
@@ -19,27 +19,36 @@ public class Kasi {
     }
 
     public ArrayList<Kortti> getKortit() {
-        return this.kortit;
-    }
-
-    public void setKortit(ArrayList<Kortti> kortit) {
-        this.kortit = kortit;
+        return kortit;
     }
 
     /**
-     * Metodi lisää kortin käteen.
+     * Metodi lisää kortin käteen ja palauttaa toden mikäli tämä onnistuu.
      *
      * @param kortti Lisättävä kortti
+     * @return tosi, mikäli kortin lisääminen onnistuu, epätosi muulloin
      */
-    public void lisaaKorttiKateen(Kortti kortti) {
-        this.kortit.add(kortti);
+    public boolean lisaaKorttiKateen(Kortti kortti) {
+
+        if (kortti != null) {
+            if (!this.kortit.contains(kortti)) {
+                this.kortit.add(kortti);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     /**
      * Metodi laittaa kortit kädessä olevat kortit järjestykseen.
      */
     public void kortitJarjestykseen() {
-        Collections.sort(kortit);
+        if (!kortit.isEmpty()) {
+            Collections.sort(kortit);
+        }
     }
 
     /**
@@ -54,16 +63,19 @@ public class Kasi {
         } else {
             return kortit.remove(poistettava);
         }
-
     }
 
     @Override
     public String toString() {
-        String kortit1 = "";
-        for (Kortti kortti : this.kortit) {
-            kortit1 = kortit1 + " " + kortti.toString();
+        if (kortit.isEmpty()) {
+            return "";
+        } else {
+            String kortit1 = "";
+            for (Kortti kortti : this.kortit) {
+                kortit1 = kortit1 + " " + kortti.toString();
+            }
+            return kortit1;
         }
-        return kortit1;
     }
 
     /**
@@ -79,8 +91,10 @@ public class Kasi {
                     return true;
                 }
             }
+            return false;
+        } else {
+            return false;
         }
-        return false;
     }
 
     /**
@@ -100,29 +114,24 @@ public class Kasi {
                     return true;
                 }
             }
+            return false;
+        } else {
+            return false;
         }
-        return false;
     }
 
     /**
-     * metodi poistaa kädessä olevat kortit.
-     */
-    public void poistaKortit() {
-        kortit.clear();
-    }
-
-    /**
-     * Metodi tarkistaa onko kädessä parametrina toimivaa korttia.
+     * Metodi poistaa kädessä olevat kortit.
      *
-     * @param haettava Kädestä haettava kortti
-     * @return tosi mikäli löytyy, epätosi muulloin
+     * @return tosi mikäli kortit poistetaan
      */
-    public boolean onkoKadessaKorttia(Kortti haettava) {
-        for (Kortti kortti : kortit) {
-            if (kortti.equals(haettava)) {
-                return true;
-            }
+    public boolean poistaKortit() {
+        if (!kortit.isEmpty()) {
+            kortit.clear();
+            return true;
+        } else {
+            return false;
         }
-        return false;
     }
+
 }

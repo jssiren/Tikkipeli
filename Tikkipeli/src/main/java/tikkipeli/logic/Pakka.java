@@ -31,25 +31,24 @@ public class Pakka {
         return this.kortit;
     }
 
-    /**
-     * Metodi tulostaa pakan kortit. Käytetään lähinnä korttien tarkistamiseen.
-     */
-    public void tulostaPakka() {
-        for (Kortti kortti : this.kortit) {
-            System.out.println(kortti);
-        }
-    }
-
-    @Override
-    public String toString() {
-        return this.kortit.toString();
-    }
-
+// Metodia ei tarvita pelin pyörimiseen. Vain korttien tarkastusta varten.
+//    /**
+//     * Metodi tulostaa pakan kortit. Käytetään lähinnä korttien tarkistamiseen.
+//     */
+//    public void tulostaPakka() {
+//        if (!kortit.isEmpty()) {
+//            for (Kortti kortti : this.kortit) {
+//                System.out.println(kortti);
+//            }
+//        }
+//    }
     /**
      * Metodi sekoittaa pakan kortit.
      */
     public void sekoitaPakka() {
-        Collections.shuffle(kortit);
+        if (!kortit.isEmpty()) {
+            Collections.shuffle(kortit);
+        }
     }
 
     /**
@@ -57,6 +56,7 @@ public class Pakka {
      */
     public void jarjestaPakka() {
         Collections.sort(kortit);
+
     }
 
 }

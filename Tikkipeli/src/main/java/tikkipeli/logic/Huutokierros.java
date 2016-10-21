@@ -9,8 +9,8 @@ package tikkipeli.logic;
  */
 public class Huutokierros {
 
-    private int voittohuuto;
-    private int huudonVoittaja;
+    private final int voittohuuto;
+    private final int huudonVoittaja;
 
     /**
      * Huutokierros muistaa voittajan ja luvun jolla on voitett huutokierros.
@@ -29,14 +29,6 @@ public class Huutokierros {
 
     public int getVoittohuuto() {
         return voittohuuto;
-    }
-
-    public void setVoittohuuto(int luku) {
-        voittohuuto = luku;
-    }
-
-    public void setHuudonVoittaja(int pelaaja) {
-        huudonVoittaja = pelaaja;
     }
 
 }

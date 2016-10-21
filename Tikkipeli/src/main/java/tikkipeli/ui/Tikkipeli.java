@@ -720,7 +720,7 @@ public class Tikkipeli extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (peli.getHuutokierrosKaynnissa() && isNumeric(jTextField5.getText())) {
-            int minimi = 25;
+            int minimi = peli.getMinimiHuuto();
 
             if (Integer.parseInt(jTextField5.getText()) > Integer.parseInt(jLabel7.getText()) && Integer.parseInt(jTextField5.getText()) >= minimi && Integer.parseInt(jTextField5.getText()) % 5 == 0) {
                 jLabel7.setText(jTextField5.getText());

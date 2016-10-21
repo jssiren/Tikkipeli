@@ -23,11 +23,11 @@ public enum Maa {
     }
 
     public int getValtinArvo() {
-        return arvo;
+        return this.arvo;
     }
 
     public String getLyhenne() {
-        return lyhenne;
+        return this.lyhenne;
     }
 
     /**

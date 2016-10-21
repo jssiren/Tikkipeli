@@ -9,18 +9,18 @@ import java.util.*;
  */
 public class Peli {
 
-    private List<Pelaaja> pelaajat;
-    private List<Integer> peliparienPisteet;
-    private Pakka pakka;
-    private List<Kierros> kierrokset;
+    private final List<Pelaaja> pelaajat;
+    private final List<Integer> peliparienPisteet;
+    private final Pakka pakka;
+    private final List<Kierros> kierrokset;
     private int vuorossaOlevaPelaaja;
-    private List<Huutokierros> huutokierrokset;
-    private boolean[] passaukset;
+    private final List<Huutokierros> huutokierrokset;
+    private final boolean[] passaukset;
     private boolean huutokierrosKaynnissa;
     private boolean kierrosKaynnissa;
     private boolean pelaajatLuotu;
     private boolean korttiPelattu;
-    private int minimiHuuto;
+    private final int minimiHuuto;
 
     /**
      * Peli luo kaiken oleellisen loogisen ja mekaanisen käytettäväksi.
@@ -36,7 +36,7 @@ public class Peli {
         huutokierrosKaynnissa = false;
         kierrosKaynnissa = false;
         pelaajatLuotu = false;
-        minimiHuuto = 25;
+        minimiHuuto = 50;
 
     }
 
@@ -72,6 +72,10 @@ public class Peli {
         return pakka;
     }
 
+    public boolean[] getPassaukset() {
+        return passaukset;
+    }
+
     public List<Integer> getPeliparienPisteet() {
         return peliparienPisteet;
     }
@@ -82,22 +86,6 @@ public class Peli {
 
     public List<Huutokierros> getHuutokierrokset() {
         return huutokierrokset;
-    }
-
-    public void setHuutokierrokset(ArrayList<Huutokierros> uudet) {
-        huutokierrokset = uudet;
-    }
-
-    public void setMinimiHuuto(int uusiMinimi) {
-        minimiHuuto = uusiMinimi;
-    }
-
-    public void setPeliparienPisteet(ArrayList<Integer> pisteet) {
-        peliparienPisteet = pisteet;
-    }
-
-    public void setPakka(Pakka korvaava) {
-        pakka = korvaava;
     }
 
     public void setKorttiPelattu(boolean onko) {
@@ -138,11 +126,9 @@ public class Peli {
         if (peliparienPisteet.isEmpty()) {
             peliparienPisteet.add(0);
             peliparienPisteet.add(0);
-        } else {
-            peliparienPisteet.set(0, 0);
-            peliparienPisteet.set(1, 0);
         }
-
+        peliparienPisteet.set(0, 0);
+        peliparienPisteet.set(1, 0);
     }
 
     /**
@@ -163,7 +149,7 @@ public class Peli {
     /**
      * Metodi järjestää pelaajien kortit.
      *
-     * @see tikkipeli.logic.Pelaaja#kortitJarjestykseen() 
+     * @see tikkipeli.logic.Pelaaja#kortitJarjestykseen()
      */
     public void jarjestaPelaajienKortit() {
         for (Pelaaja pelaaja : pelaajat) {
@@ -174,7 +160,7 @@ public class Peli {
     /**
      * Metodi poistaa kaikkien pelaajien kortit.
      *
-     * @see tikkipeli.logic.Pelaaja#poistaKortit() 
+     * @see tikkipeli.logic.Pelaaja#poistaKortit()
      */
     public void poistaPelaajienKortit() {
         for (Pelaaja pelaaja : pelaajat) {
@@ -266,11 +252,14 @@ public class Peli {
      * Metodi tarkistaa päättyykö kierros, eli onko seuraavalla pelaajalla enää
      * kortteja. Jos ei ole, niin kierros päättyy.
      *
-     *
+     * @return Tosi mikäli kierros päättyy, epätosi muulloin
      */
-    public void paattyykoKierros() {
+    public boolean paattyykoKierros() {
         if (pelaajat.get(seuraavaPelaaja()).getKasi().getKortit().isEmpty()) {
             lopetaKierros();
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -386,9 +375,9 @@ public class Peli {
     }
 
     /**
-     * Metodi aloittaa pelin parametrina annettujen pelaajien nimillä,
-     * jakaa pelaajille kortit, ja aloittaa huutokierroksen.
-     * 
+     * Metodi aloittaa pelin parametrina annettujen pelaajien nimillä, jakaa
+     * pelaajille kortit, ja aloittaa huutokierroksen.
+     *
      * @param nimi1 Pelaajan 1 nimi
      * @param nimi2 Pelaajan 2 nimi
      * @param nimi3 Pelaajan 3 nimi
@@ -403,12 +392,11 @@ public class Peli {
         aloitaHuutokierros();
     }
 
-
     /**
      * Metodi aloittaa uuden huutokierroksen ja määrää ensimmäiseksi huutajaksi
-     * pelaajan huutokierrosten lukumäärän perusteella.
-     * Ensimmäisen huutokierroksen aloittaa ensimmäinen pelaaja,
-     * toisen toinen ja niin edelleen.
+     * pelaajan huutokierrosten lukumäärän perusteella. Ensimmäisen
+     * huutokierroksen aloittaa ensimmäinen pelaaja, toisen toinen ja niin
+     * edelleen.
      */
     public void aloitaHuutokierros() {
         huutokierrosKaynnissa = true;
@@ -422,8 +410,8 @@ public class Peli {
 
     /**
      * Metodi lopettaa huutokierroksen ja siirtyy tikkien pelaamiseen.
-     * 
-     * @see tikkipeli.logic.Peli#aloitaKierros() 
+     *
+     * @see tikkipeli.logic.Peli#aloitaKierros()
      * @param voittohuuto Huutokierroksen voittohuuto
      */
     public void lopetaHuutokierros(int voittohuuto) {
@@ -435,7 +423,6 @@ public class Peli {
         aloitaKierros();
     }
 
-
     /**
      * Metodi aloittaa kierroksen.
      */
@@ -444,11 +431,9 @@ public class Peli {
         kierrokset.get(kierrokset.size() - 1).getTikit().add(new Tikki());
     }
 
-
     /**
-     * Metodi lopettaa kierroksen, eli tikkien pelaamisen,
-     * laskee pisteet ja toisen peliparin pisteiden yltäessä yli 500
-     * pisteen, lopettaa pelin.
+     * Metodi lopettaa kierroksen, eli tikkien pelaamisen, laskee pisteet ja
+     * toisen peliparin pisteiden yltäessä yli 500 pisteen, lopettaa pelin.
      */
     public void lopetaKierros() {
         kierrosKaynnissa = false;
