@@ -9,8 +9,8 @@ import java.util.*;
  */
 public class Peli {
 
-    private List<Pelipari> peliparit;
     private List<Pelaaja> pelaajat;
+    private List<Integer> peliparienPisteet;
     private Pakka pakka;
     private List<Kierros> kierrokset;
     private int vuorossaOlevaPelaaja;
@@ -20,6 +20,7 @@ public class Peli {
     private boolean kierrosKaynnissa;
     private boolean pelaajatLuotu;
     private boolean korttiPelattu;
+    private int minimiHuuto;
 
     /**
      * Peli luo kaiken oleellisen loogisen ja mekaanisen käytettäväksi.
@@ -27,13 +28,15 @@ public class Peli {
     public Peli() {
         this.pakka = new Pakka();
         kierrokset = new ArrayList<>();
-        vuorossaOlevaPelaaja = 1;
+        vuorossaOlevaPelaaja = 0;
         pelaajat = new ArrayList<>();
         huutokierrokset = new ArrayList<>();
+        peliparienPisteet = new ArrayList<>();
         passaukset = new boolean[4];
         huutokierrosKaynnissa = false;
         kierrosKaynnissa = false;
         pelaajatLuotu = false;
+        minimiHuuto = 25;
 
     }
 
@@ -41,21 +44,8 @@ public class Peli {
         return this.kierrokset;
     }
 
-    public List<Pelipari> getPeliparit() {
-        return peliparit;
-    }
-
     public List<Pelaaja> getPelaajat() {
         return this.pelaajat;
-    }
-
-    /**
-     * Metodi hakee parametrin arvolla peliparin.
-     * @param i peliparin indeksi
-     * @return haettu pelipari
-     */
-    public Pelipari getPelipari(int i) {
-        return peliparit.get(i);
     }
 
     public int getVuorossaOlevaPelaaja() {
@@ -78,6 +68,38 @@ public class Peli {
         return korttiPelattu;
     }
 
+    public Pakka getPakka() {
+        return pakka;
+    }
+
+    public List<Integer> getPeliparienPisteet() {
+        return peliparienPisteet;
+    }
+
+    public int getMinimiHuuto() {
+        return minimiHuuto;
+    }
+
+    public List<Huutokierros> getHuutokierrokset() {
+        return huutokierrokset;
+    }
+
+    public void setHuutokierrokset(ArrayList<Huutokierros> uudet) {
+        huutokierrokset = uudet;
+    }
+
+    public void setMinimiHuuto(int uusiMinimi) {
+        minimiHuuto = uusiMinimi;
+    }
+
+    public void setPeliparienPisteet(ArrayList<Integer> pisteet) {
+        peliparienPisteet = pisteet;
+    }
+
+    public void setPakka(Pakka korvaava) {
+        pakka = korvaava;
+    }
+
     public void setKorttiPelattu(boolean onko) {
         korttiPelattu = onko;
     }
@@ -95,7 +117,7 @@ public class Peli {
     }
 
     /**
-     * Asettaa pelaajat.
+     * Metodi asettaa pelaajat.
      *
      * @param nimi1 Pelaaja 1
      * @param nimi2 Pelaaja 2
@@ -110,26 +132,17 @@ public class Peli {
     }
 
     /**
-     * Asettaa peliparit: parilliset ovat yksi, parittomat toinen.
-     *
-     * @param nimi1 Pelaaja 1
-     * @param nimi2 Pelaaja 2
-     * @param nimi3 Pelaaja 3
-     * @param nimi4 Pelaaja 4
+     * Metodi asettaa peliparien pisteet nolliksi.
      */
-    public void setPeliparit(String nimi1, String nimi2, String nimi3, String nimi4) {
-        lisaaPelipari(nimi1, nimi3);
-        lisaaPelipari(nimi2, nimi4);
-    }
+    public void asetaPisteetNolliksi() {
+        if (peliparienPisteet.isEmpty()) {
+            peliparienPisteet.add(0);
+            peliparienPisteet.add(0);
+        } else {
+            peliparienPisteet.set(0, 0);
+            peliparienPisteet.set(1, 0);
+        }
 
-    /**
-     * Metodi selkiyttää peliparien luomista.
-     *
-     * @param nimi1 Peliparin pelaaja 1
-     * @param nimi2 Peliparin pelaaja 2
-     */
-    public void lisaaPelipari(String nimi1, String nimi2) {
-        peliparit.add(new Pelipari(new Pelaaja(nimi1), new Pelaaja(nimi2)));
     }
 
     /**
@@ -140,11 +153,8 @@ public class Peli {
             poistaPelaajienKortit();
         }
         pakka.sekoitaPakka();
-        int i = 0;
         for (Kortti kortti : pakka.getKortit()) {
-            int j = i % 4;
-            pelaajat.get(j).getKasi().lisaaKorttiKateen(kortti);
-            i++;
+            pelaajat.get(pakka.getKortit().indexOf(kortti) % 4).lisaaKorttiKateen(kortti);
         }
         jarjestaPelaajienKortit();
         asetaPassauksetFalse();
@@ -153,7 +163,7 @@ public class Peli {
     /**
      * Metodi järjestää pelaajien kortit.
      *
-     * @see tikkipeli.Logic.Pelaaja#kortitJarjestykseen()
+     * @see tikkipeli.logic.Pelaaja#kortitJarjestykseen() 
      */
     public void jarjestaPelaajienKortit() {
         for (Pelaaja pelaaja : pelaajat) {
@@ -164,7 +174,7 @@ public class Peli {
     /**
      * Metodi poistaa kaikkien pelaajien kortit.
      *
-     * @see tikkipelli.Logic.Pelaaja#poistaKortit()
+     * @see tikkipeli.logic.Pelaaja#poistaKortit() 
      */
     public void poistaPelaajienKortit() {
         for (Pelaaja pelaaja : pelaajat) {
@@ -221,25 +231,6 @@ public class Peli {
     }
 
     /**
-     * Kun kierros päättyy tarvitaan uusi kierros, ja kierrokselle ensimmäinen
-     * tikki.
-     */
-    public void lisaaKierros() {
-        this.kierrokset.add(new Kierros(vuorossaOlevaPelaaja));
-        this.kierrokset.get(this.kierrokset.size() - 1).lisaaTikki();
-    }
-
-    /**
-     * Metodi lisää käydyn huutokierroksen listalle.
-     *
-     * @param voittohuuto määrä jolla huutokierros voitettiin
-     */
-    public void lisaaHuutokierros(int voittohuuto) {
-        this.huutokierrokset.add(new Huutokierros(voittohuuto, vuorossaOlevaPelaaja));
-        asetaPassauksetFalse();
-    }
-
-    /**
      * Metodi asettaa kaikki passaukset epätosiksi. Tätä tarvitaan
      * huutokierroksen päätteksi, kun huudon voittaja on selvillä. Ja ei haluta
      * vaikuttaa kierroksen kulkuun, koska kierroksen aikana kaikkien täytyy
@@ -272,12 +263,30 @@ public class Peli {
     }
 
     /**
-     * Metodi palauttaaa toden mikäli kierros päättyy.
+     * Metodi tarkistaa päättyykö kierros, eli onko seuraavalla pelaajalla enää
+     * kortteja. Jos ei ole, niin kierros päättyy.
      *
-     * @return tosi mikäli kierros päätty
+     *
      */
-    public boolean paattyykoKierros() {
+    public void paattyykoKierros() {
         if (pelaajat.get(seuraavaPelaaja()).getKasi().getKortit().isEmpty()) {
+            lopetaKierros();
+        }
+    }
+
+    /**
+     * Metodi palauttaa toden mikäli pelivuorossa oleva pelaaja voi pelata
+     * kyseisen kortin kädestä. Jos kierros päättyy niin aloitetaan uusi
+     * huutokierros. Muutoin jos aloitetaan uusi tikki, siirretään vuoro sille
+     * pelaajalle joka voitti edellisen tikin.
+     *
+     * @param kortti kortti joka aiotaan pelata
+     * @return tosi mikäli voi pelata, epätosi muulloin
+     */
+    public boolean vuorossaOlevaPelaajaPelaaKortin(int kortti) {
+        Kasi pelaajanKasi = pelaajat.get(vuorossaOlevaPelaaja).getKasi();
+        Kierros kierros = kierrokset.get(kierrokset.size() - 1);
+        if (kierros.vuorossaOlevaPelaajaPelaaKortin(pelaajat.get(vuorossaOlevaPelaaja), pelaajanKasi.getKortit().get(kortti))) {
             return true;
         } else {
             return false;
@@ -285,23 +294,187 @@ public class Peli {
     }
 
     /**
-     * Metodi asettaa oikean pelaajalle pelivuoron. Ensmmäisen kierroksen
-     * aloittaa aina Pelaaja 1, toisen Pelaaja 2, jne.
+     * Metodi tarkistaa onko viimeisimmän kierroksen viimeisin tikki tyhjä. Jos
+     * näin on pelivuoro siirretään sille pelaajalle, joka voitti aikaisemman
+     * tikin.
      */
-    public void aloitaUusiKierros() {
-        vuorossaOlevaPelaaja = (kierrokset.size() - 1) % 4;
+    public void tikkiTaynnaSiirraVuoroVoittajalle() {
+        Kierros kierros = kierrokset.get(kierrokset.size() - 1);
+        if (kierros.getTikit().get(kierros.getTikit().size() - 1).getKortit().isEmpty()) {
+            Pelaaja seuraavaVuorossa = kierros.getVoittavatPelaajat().get(kierros.getVoittavatPelaajat().size() - 1);
+            vuorossaOlevaPelaaja = pelaajat.indexOf(seuraavaVuorossa);
+        }
     }
 
     /**
-     * Metodi palauttaa toden mikäli pelivuorossa oleva pelaaja voi pelata
-     * kyseisen kortin kädestä.
+     * Metodi tarkistaa onko viimeisin tikki tyhjä, eli onko aloitettu uusi
+     * tikki.
      *
-     * @param kortti kortti joka aiotaan pelata
-     * @return tosi mikäli voi pelata, epätosi muulloin
+     * @return tosi mikäli viimeisin tikki on tyhjä, epätosi muulloin
      */
-    public boolean vuorossaOlevaPelaajaPelaaKortin(int kortti) {
-        Kierros kierros = kierrokset.get(kierrokset.size() - 1);
-        return kierros.vuorossaOlevaPelaajaPelaaKortin(pelaajat.get(vuorossaOlevaPelaaja), kortti);
+    public boolean viimeisinTikkiTyhja() {
+        if (kierrokset.get(kierrokset.size() - 1).viimeisinTikkiTyhja()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Metodi laskee peliaparien pisteet. Pelaajat, joiden indeksit on 0 ja 2
+     * ovat ensimmäinen pelipari. Pelaajat, joiden indeksit ovat 1 ja 3 ovat
+     * toinen pelipari.
+     */
+    public void laskePisteet() {
+        ArrayList<Tikki> tikit = kierrokset.get(kierrokset.size() - 1).getTikit();
+        ArrayList<Pelaaja> voittajat = kierrokset.get(kierrokset.size() - 1).getVoittavatPelaajat();
+        int huudonVoittaja = huutokierrokset.get(huutokierrokset.size() - 1).getHuudonVoittaja();
+        int voittohuuto = huutokierrokset.get(huutokierrokset.size() - 1).getVoittohuuto();
+        int peliparin1Pisteet = 0;
+        int peliparin2Pisteet = 0;
+        for (int i = 0; i < voittajat.size(); i++) {
+            Pelaaja voittaja = voittajat.get(i);
+            Tikki tikki = tikit.get(i);
+            if (pelaajanIndeksi(voittaja) % 2 == 0) {
+                peliparin1Pisteet += tikki.tikinPisteet();
+                if (tikit.indexOf(tikki) == 8) {
+                    peliparin1Pisteet += 20;
+                }
+            } else {
+                peliparin2Pisteet += tikki.tikinPisteet();
+                if (tikit.indexOf(tikki) == 8) {
+                    peliparin2Pisteet += 20;
+                }
+            }
+        }
+        if (huudonVoittaja % 2 == 0) {
+            if (peliparin1Pisteet < voittohuuto) {
+                peliparienPisteet.set(0, peliparienPisteet.get(0) - voittohuuto);
+            } else {
+                peliparienPisteet.set(0, peliparienPisteet.get(0) + voittohuuto);
+            }
+            peliparienPisteet.set(1, peliparienPisteet.get(1) + peliparin2Pisteet);
+        } else {
+            if (peliparin2Pisteet < voittohuuto) {
+                peliparienPisteet.set(1, peliparienPisteet.get(1) - voittohuuto);
+            } else {
+                peliparienPisteet.set(1, peliparienPisteet.get(1) + voittohuuto);
+            }
+            peliparienPisteet.set(0, peliparienPisteet.get(0) + peliparin2Pisteet);
+        }
+    }
+
+    /**
+     * Metodi palauttaa argumenttina olevan pelaajan indeksin. Helpottaa
+     * pisteenlaskua.
+     *
+     * @param pelaaja Haettava pelaaja
+     * @return pelaajan indeksi
+     */
+    public int pelaajanIndeksi(Pelaaja pelaaja) {
+        return pelaajat.indexOf(pelaaja);
+    }
+
+    /**
+     * Metodi lisää käydyn huutokierroksen listalle.
+     *
+     * @param voittohuuto määrä jolla huutokierros voitettiin
+     */
+    public void lisaaHuutokierros(int voittohuuto) {
+        this.huutokierrokset.add(new Huutokierros(vuorossaOlevaPelaaja, voittohuuto));
+        asetaPassauksetFalse();
+    }
+
+    /**
+     * Metodi aloittaa pelin parametrina annettujen pelaajien nimillä,
+     * jakaa pelaajille kortit, ja aloittaa huutokierroksen.
+     * 
+     * @param nimi1 Pelaajan 1 nimi
+     * @param nimi2 Pelaajan 2 nimi
+     * @param nimi3 Pelaajan 3 nimi
+     * @param nimi4 Pelaajan 4 nimi
+     */
+    public void aloitaPeli(String nimi1, String nimi2, String nimi3, String nimi4) {
+        setPelaajat(nimi1, nimi2, nimi3, nimi4);
+        huutokierrosKaynnissa = true;
+        pelaajatLuotu = true;
+        jaaPelaajilleKortit();
+        asetaPisteetNolliksi();
+        aloitaHuutokierros();
+    }
+
+
+    /**
+     * Metodi aloittaa uuden huutokierroksen ja määrää ensimmäiseksi huutajaksi
+     * pelaajan huutokierrosten lukumäärän perusteella.
+     * Ensimmäisen huutokierroksen aloittaa ensimmäinen pelaaja,
+     * toisen toinen ja niin edelleen.
+     */
+    public void aloitaHuutokierros() {
+        huutokierrosKaynnissa = true;
+        if (huutokierrokset.isEmpty()) {
+            setPelivuorossaOlevaPelaaja(0);
+        } else {
+            setPelivuorossaOlevaPelaaja(huutokierrokset.size());
+        }
+
+    }
+
+    /**
+     * Metodi lopettaa huutokierroksen ja siirtyy tikkien pelaamiseen.
+     * 
+     * @see tikkipeli.logic.Peli#aloitaKierros() 
+     * @param voittohuuto Huutokierroksen voittohuuto
+     */
+    public void lopetaHuutokierros(int voittohuuto) {
+        siirrySeuraavaanPelaajaan();
+        lisaaHuutokierros(voittohuuto);
+        huutokierrosKaynnissa = false;
+        kierrosKaynnissa = true;
+        asetaPassauksetFalse();
+        aloitaKierros();
+    }
+
+
+    /**
+     * Metodi aloittaa kierroksen.
+     */
+    public void aloitaKierros() {
+        kierrokset.add(new Kierros());
+        kierrokset.get(kierrokset.size() - 1).getTikit().add(new Tikki());
+    }
+
+
+    /**
+     * Metodi lopettaa kierroksen, eli tikkien pelaamisen,
+     * laskee pisteet ja toisen peliparin pisteiden yltäessä yli 500
+     * pisteen, lopettaa pelin.
+     */
+    public void lopetaKierros() {
+        kierrosKaynnissa = false;
+        korttiPelattu = false;
+        laskePisteet();
+        int maksimiPisteet = 0;
+        for (Integer pisteet : peliparienPisteet) {
+            if (pisteet > maksimiPisteet) {
+                maksimiPisteet = pisteet;
+            }
+        }
+        if (maksimiPisteet > 500) {
+            lopetaPeli();
+        } else {
+            aloitaHuutokierros();
+        }
+    }
+
+    /**
+     * Metodi lopettaa pelin.
+     */
+    public void lopetaPeli() {
+        pelaajatLuotu = false;
+        kierrosKaynnissa = false;
+        asetaPisteetNolliksi();
+
     }
 
 }

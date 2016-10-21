@@ -12,7 +12,6 @@ public class Tikki {
 
     private ArrayList<Kortti> kortit;
     private ArrayList<Pelaaja> pelaajat;
-    private Maa valtti;
 
     /**
      * Tikki on lista kortteja ja pelaajia joka muistaa mikä maa on valttia.
@@ -20,31 +19,18 @@ public class Tikki {
     public Tikki() {
         this.kortit = new ArrayList<>();
         pelaajat = new ArrayList<>();
-        valtti = Maa.TYHJA;
     }
 
     public ArrayList<Kortti> getKortit() {
-        return this.kortit;
+        return kortit;
     }
-
-    /**
-     * Valtin vaihto vaikuttaa pelin kulkuun.
-     *
-     * @param valtti Maa johon valtti vaihdetaan.
-     */
-    public void vaihdaValtti(Maa valtti) {
-        this.valtti = valtti;
+    
+    public ArrayList<Pelaaja> getPelaajat() {
+        return pelaajat;
     }
-
-    /**
-     * Lisää kortin tikkiin.
-     * 
-     * @param kortti Lisättävä kortti
-     * @param pelaaja pelaaja joka pelaa kortin
-     */
-    public void lisaaKorttiTikkiin(Kortti kortti, Pelaaja pelaaja) {
-        kortit.add(kortti);
-        pelaajat.add(pelaaja);
+    
+    public void setKortit(ArrayList<Kortti> korvaaja) {
+        kortit = korvaaja;
     }
 
     /**
@@ -55,38 +41,15 @@ public class Tikki {
      * @return Kortti joka voittaa tikin
      */
     public Kortti tikinVoittavaKortti() {
-        Kortti kortti = kortit.get(0); // tikin aloittava kortti
-        if (valtti.equals(Maa.TYHJA)) {
-            for (Kortti kortti1 : kortit) {
-                if (kortti1.getMaa().equals(kortti.getMaa()) && kortti1.getArvo() > kortti.getArvo()) {
-                    kortti = kortti1;
-                }
+        Kortti aloituskortti = kortit.get(0); // tikin aloittava kortti
+        for (Kortti kortti : kortit) {
+            if (kortti.getMaa().getValtinArvo() == aloituskortti.getMaa().getValtinArvo() && kortti.getArvo() > aloituskortti.getArvo()) {
+                aloituskortti = kortti;
             }
-            return kortti;
-        } else {
-            for (Kortti kortti1 : kortit) {
-                if (!kortti.getMaa().equals(valtti) && kortti1.getMaa().equals(valtti)) {
-                    kortti = kortti1;
-                } else if (kortti.getMaa().equals(valtti) && kortti1.getMaa().equals(valtti) && (kortti1.getArvo() > kortti.getArvo())) {
-                    kortti = kortti1;
-                }
-            }
-            return kortti;
         }
+        return aloituskortti;
     }
 
-//    private boolean tikkiinPelattuValttia() {
-//        if (!kortit.isEmpty()) {
-//            for (Kortti kortti : kortit) {
-//                if (kortti.getMaa().equals(valtti)) {
-//                    return true;
-//                }
-//            }
-//            return false;
-//        } else {
-//            return false;
-//        }
-//    }
     /**
      * Metodi palauttaa toden mikäli kortin voi pelata kyseiseen tikkiin. Pelin
      * sääntöjen mukaan pelattavilla korteilla on maantunnustuspakko ja
@@ -95,33 +58,26 @@ public class Tikki {
      * maata oleva kortti se täytyy pelata. Jos valtti on julistettu ja valttia
      * on pelattu, ylimenopakko ei enää päde ellei pelaa valttimaan korttia.
      *
-     * @param moneskoKortti kortin indeksi
+     * @param kortti pelattava kortti
      * @param pelaaja pelaaja jolta pelataan kortti
      *
      * @return tosi mikäli voi pelata kortin, epätosi muulloin
      */
-    public boolean voikoKortinPelataTikkiin(int moneskoKortti, Pelaaja pelaaja) {
+    public boolean voikoKortinPelataTikkiin(Kortti kortti, Pelaaja pelaaja) {
         Kasi pelaajanKasi = pelaaja.getKasi();
-        Kortti pelattavaKortti = pelaajanKasi.getKortit().get(moneskoKortti);
-
+        Kortti pelattavaKortti = kortti;
         if (kortit.isEmpty()) {
             return true;
         } else {
-            Kortti tikinAloitusKortti = kortit.get(0);
             Kortti tikinJohtavaKortti = tikinVoittavaKortti();
-
             if (pelaajanKasi.loytyykoKadestaSamaaMaataJaIsompaa(tikinJohtavaKortti)) {
-                if (!pelattavaKortti.getMaa().equals(tikinJohtavaKortti.getMaa()) || pelattavaKortti.getArvo() < tikinJohtavaKortti.getArvo()) {
+                if (pelattavaKortti.getMaa().getValtinArvo() != tikinJohtavaKortti.getMaa().getValtinArvo() || pelattavaKortti.getArvo() < tikinJohtavaKortti.getArvo()) {
                     return false;
                 } else {
                     return true;
                 }
-            } else if (pelaajanKasi.loytyykoKadestaMaata(tikinAloitusKortti.getMaa())) {
-                if (!pelattavaKortti.getMaa().equals(tikinAloitusKortti.getMaa())) {
-                    return false;
-                } else {
-                    return true;
-                }
+            } else if (pelaajanKasi.loytyykoKadestaMaata(tikinJohtavaKortti.getMaa()) && pelattavaKortti.getMaa().getValtinArvo() != tikinJohtavaKortti.getMaa().getValtinArvo()) {
+                return false;
             } else {
                 return true;
             }
@@ -145,13 +101,13 @@ public class Tikki {
      * Metodi tarkistaa voiko pelaaja pelata kädestään tietyn kortin sääntöjen
      * puitteiss.
      *
-     * @param pelaaja joka haluaa pelata  kortin
-     * @param moneskoKortti pelatatavan kortin indeksi
+     * @param pelaaja joka haluaa pelata kortin
+     * @param kortti pelatatava kortti
      * @return tosi mikäli voi, epätosi muulloin
      */
-    public boolean vuorossaOlevaPelaajaPelaaKortin(Pelaaja pelaaja, int moneskoKortti) {
-        if (voikoKortinPelataTikkiin(moneskoKortti, pelaaja) && pelaaja.poistaKortti(moneskoKortti)) {
-            kortit.add(pelaaja.getKasi().getKortit().get(moneskoKortti));
+    public boolean vuorossaOlevaPelaajaPelaaKortin(Pelaaja pelaaja, Kortti kortti) {
+        if (voikoKortinPelataTikkiin(kortti, pelaaja) && pelaaja.poistaKortti(kortti)) {
+            kortit.add(kortti);
             pelaajat.add(pelaaja);
             return true;
         } else {

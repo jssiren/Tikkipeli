@@ -32,7 +32,7 @@ public class Kasi {
      * @param kortti Lisättävä kortti
      */
     public void lisaaKorttiKateen(Kortti kortti) {
-        kortit.add(kortti);
+        this.kortit.add(kortti);
     }
 
     /**
@@ -48,12 +48,11 @@ public class Kasi {
      * @param poistettava Poistettava kortti
      * @return tosi mikäli voi poistaa
      */
-    public boolean poistaKorttiKadesta(int poistettava) {
+    public boolean poistaKorttiKadesta(Kortti poistettava) {
         if (kortit.isEmpty()) {
             return false;
         } else {
-            kortit.remove(poistettava);
-            return true;
+            return kortit.remove(poistettava);
         }
 
     }
@@ -62,7 +61,7 @@ public class Kasi {
     public String toString() {
         String kortit1 = "";
         for (Kortti kortti : this.kortit) {
-            kortit1 = kortti.toString() + " ";
+            kortit1 = kortit1 + " " + kortti.toString();
         }
         return kortit1;
     }

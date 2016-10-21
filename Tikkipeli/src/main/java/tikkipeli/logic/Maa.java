@@ -37,7 +37,7 @@ public enum Maa {
      * @return tosi jos ovat samaa maata
      */
     public boolean equals(Maa maa) {
-        if (lyhenne.matches(maa.getLyhenne())) {
+        if (lyhenne.matches(maa.getLyhenne()) && arvo == maa.getValtinArvo()) {
             return true;
         } else {
             return false;

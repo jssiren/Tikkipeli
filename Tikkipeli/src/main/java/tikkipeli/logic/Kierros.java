@@ -3,27 +3,22 @@ package tikkipeli.logic;
 import java.util.*;
 
 /**
- * Kierros on lista tikkejä ja lista pelaajia.
+ * Kierros on lista tikkejä ja lista pelaajia jotka ovat voittaneet kyseiset
+ * tikit.
+ *
  * @author janne
  */
-
 public class Kierros {
 
     private ArrayList<Tikki> tikit;
     private ArrayList<Pelaaja> tikinVoittavaPelaaja;
-    private Maa valtti;
-    private int huudonVoittaja;
-    
 
     /**
      * Kierrosta luodessa pitää muistaa kuka aloittaa kierroksen.
-     * @param pelaaja Huutokierroksen voittaja
      */
-    public Kierros(int pelaaja) {
+    public Kierros() {
         tikit = new ArrayList<>();
         tikinVoittavaPelaaja = new ArrayList<>();
-        valtti = Maa.TYHJA;
-        huudonVoittaja = pelaaja;
     }
 
     public ArrayList<Tikki> getTikit() {
@@ -34,48 +29,6 @@ public class Kierros {
         return tikinVoittavaPelaaja;
     }
 
-    public Maa getValtti() {
-        return valtti;
-    }
-
-    public int getHuudonVoittaja() {
-        return huudonVoittaja;
-    }
-
-    public void setHuudonVoittaja(int pelaaja) {
-        huudonVoittaja = pelaaja;
-    }
-
-    /**
-     * Metodi lisää tikin tikkien listalle. Peli aina hakee viimeisimmän
-     * kierroksen viimeisimmän tikin.
-     */
-    public void lisaaTikki() {
-        tikit.add(new Tikki());
-    }
-
-    /**
-     * Metodi lisää parametrin pelaajan tikin voittaneiden listalle. Listaa
-     * tarvitaan kun kierroksen jälkeen lasketaan pisteitä.
-     *
-     * @param pelaaja Pelaaja joka on voittanut tikin
-     */
-    public void lisaaVoittavaPelaaja(Pelaaja pelaaja) {
-        tikinVoittavaPelaaja.add(pelaaja);
-    }
-
-    /**
-     * Metodin tarkoitus on selventää vain valtin vaihtoa. Jokaisen kierroksen
-     * alussa valttia ei ole, vaan se pitää julistaa erikseen ja yhden
-     * kierroksen aikana voi julistaa myös useamman valtin.
-     *
-     * @param maa Maa johon vaihdetaan valtti
-     */
-    public void vaihdaValtti(Maa maa) {
-        valtti = maa;
-        tikit.get(tikit.size() - 1).vaihdaValtti(valtti);
-    }
-
     /**
      * Metodi lisää viimeisimpaan tikkiin kortin, jos näin voi tehdä.
      *
@@ -83,20 +36,40 @@ public class Kierros {
      * @param kortti Kortti jonka pelaaja pelaa
      * @return tosi mikäli kortin voi pelata tikkiin, epätosi muulloin
      */
-    public boolean vuorossaOlevaPelaajaPelaaKortin(Pelaaja pelaaja, int kortti) {
+    public boolean vuorossaOlevaPelaajaPelaaKortin(Pelaaja pelaaja, Kortti kortti) {
+        if (tikit.isEmpty()) {
+            tikit.add(new Tikki());
+        }
         Tikki tikki = tikit.get(tikit.size() - 1);
-        return tikki.vuorossaOlevaPelaajaPelaaKortin(pelaaja, kortti);
+        if (tikki.vuorossaOlevaPelaajaPelaaKortin(pelaaja, kortti)) {
+            if (tikki.getKortit().size() == 4) {
+                int voittavanKortinIndeksi = tikki.getKortit().indexOf(tikki.tikinVoittavaKortti());
+                Pelaaja voittavaPelaaja = tikki.getPelaajat().get(voittavanKortinIndeksi);
+                tikinVoittavaPelaaja.add(voittavaPelaaja);
+                tikit.add(new Tikki());
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
-     * Metodi tarkistaa voiko jo siirtyä seuravan tikin pelaamiseen. Tikissä on
-     * aina enintaan 4 korttia.
-     *
-     * @return tosi mikäli voidaan siirtyä seuraavaan tikkiin
+     * Metodi lisää uuden tikin tikkien listalle.
      */
-    public boolean siirrytaanSeuraavaanTikkiin() {
-        if (tikit.get(tikit.size() - 1).getKortit().size() == 4) {
-            tikit.add(new Tikki());
+    public void lisaaTikki() {
+        tikit.add(new Tikki());
+    }
+
+    /**
+     * Metodi tarkistaa onko kierroksen viimeisin tikki tyhjä.
+     *
+     * @return tosi jos viimeisin tikki on tyhjä, epätosi muulloin
+     */
+    public boolean viimeisinTikkiTyhja() {
+        if (tikit.isEmpty()) {
+            return true;
+        } else if (tikit.get(tikit.size() - 1).getKortit().isEmpty()) {
             return true;
         } else {
             return false;

@@ -31,4 +31,12 @@ public class Huutokierros {
         return voittohuuto;
     }
 
+    public void setVoittohuuto(int luku) {
+        voittohuuto = luku;
+    }
+
+    public void setHuudonVoittaja(int pelaaja) {
+        huudonVoittaja = pelaaja;
+    }
+
 }

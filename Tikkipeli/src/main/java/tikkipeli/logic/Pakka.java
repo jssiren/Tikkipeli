@@ -19,7 +19,7 @@ public class Pakka {
 
         for (Maa maa : Maa.values()) {
             for (KortinArvo arvo : KortinArvo.values()) {
-                if (!maa.equals(Maa.TYHJA)) {
+                if (maa.getValtinArvo() > 0) {
                     this.kortit.add(new Kortti(maa, arvo));
                 }
 

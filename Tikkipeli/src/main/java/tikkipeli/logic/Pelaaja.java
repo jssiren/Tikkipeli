@@ -12,6 +12,7 @@ public class Pelaaja {
 
     /**
      * Pelaaja muistaa nimensä ja kätensä.
+     *
      * @param nimi Pelaajan nimi
      */
     public Pelaaja(String nimi) {
@@ -36,16 +37,25 @@ public class Pelaaja {
     }
 
     /**
+     * Metodi lisää pelaajan käteen parametrina annetun kortin.
+     *
+     * @param kortti kortti joka lisätään
+     */
+    public void lisaaKorttiKateen(Kortti kortti) {
+        kasi.lisaaKorttiKateen(kortti);
+    }
+
+    /**
      * Metodi tarkistaa voiko kortin poistaa, ja jos voi niin poistaa sen
      * kädestä.
      *
      * @param kortti Poistettava kortti
      *
-     * @see tikkipeli.Logic.Kasi#poistaKortit()
+     * @see tikkipeli.logic.Kasi#poistaKortit() 
      *
      * @return tosi jos poisto onnistui, epätosi jos epäonnistui
      */
-    public boolean poistaKortti(int kortti) {
+    public boolean poistaKortti(Kortti kortti) {
         if (kasi.poistaKorttiKadesta(kortti)) {
             return true;
         } else {
@@ -56,7 +66,7 @@ public class Pelaaja {
     /**
      * Metodi asettaa kädessä olevat kortit järjestykseen.
      *
-     * @see tikkipeli.Logic.Kasi#kortitJarjestykseen()
+     * @see tikkipeli.logic.Kasi#kortitJarjestykseen() 
      */
     public void kortitJarjestykseen() {
         this.kasi.kortitJarjestykseen();
@@ -70,7 +80,7 @@ public class Pelaaja {
     /**
      * Metodi poistaa pelaajan kädessä olevat kortit, eli tyhjentää käden.
      *
-     * @see tikkipeli.Logic.Kasi#poistaKortit()
+     * @see tikkipeli.logic.Kasi#poistaKortit() 
      */
     public void poistaKortit() {
         kasi.poistaKortit();

@@ -57,6 +57,20 @@ public class Kortti implements Comparable<Kortti> {
     public void setArvo(KortinArvo arvo) {
         this.arvo = arvo;
     }
+    
+    /**
+     * Metodin avulla määritetään ovatko kortit samoja.
+     * 
+     * @param kortti kortti johon verrataan
+     * @return palauttaa toden mikäli korttien maat ja arvot samoja
+     */
+    public boolean equals(Kortti kortti) {
+        if (kortti.getMaa().equals(maa) && kortti.getArvo() == arvo.getKortinArvo()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /**
      * compareTo metodin avulla kädessä olevat kortit laitetaan järjestykseen
